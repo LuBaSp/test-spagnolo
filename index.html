@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Test di livello spagnolo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap">
+<style>
+/* Layout: exam booklet. Sticky bar with the three pruebas + clock; one reading column; answer-sheet bubble grid as a side rail. */
+:root{
+  --paper:#F3F5F9; --surface:#FFFFFF; --sheet:#F8F9FC;
+  --ink:#131C33; --ink-2:#46526E; --muted:#6B758E;
+  --line:#DDE2EC; --line-strong:#C3CAD8; --track:#E6EAF2; --chip:#EDF0F6;
+  --accent:#2349B5; --accent-hover:#1B3C99; --accent-ink:#1E3F9E; --accent-soft:#E7EDFB; --on-accent:#FFFFFF;
+  --ok:#1F8A55; --ok-ink:#17643F; --ok-soft:#E1F3E9;
+  --bad:#C2392F; --bad-ink:#A2281F; --bad-soft:#FBE6E3;
+  --warn:#B26A00; --warn-ink:#8A5200; --warn-soft:#FFF0D4;
+  --on-status:#FFFFFF; --scrim:rgba(19,28,51,.45); --shadow:0 20px 50px rgba(19,28,51,.18);
+  --f-display:"Bricolage Grotesque","Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-ui:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-text:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1220; --surface:#151B2D; --sheet:#111727;
+    --ink:#E6EAF4; --ink-2:#AAB4CA; --muted:#808AA2;
+    --line:#262F46; --line-strong:#3A4460; --track:#222B42; --chip:#1E263B;
+    --accent:#7F9CF5; --accent-hover:#99B0F8; --accent-ink:#A9BCFA; --accent-soft:#1C2747; --on-accent:#0D1220;
+    --ok:#3FBF7F; --ok-ink:#6FD6A0; --ok-soft:#13291F;
+    --bad:#EF6F64; --bad-ink:#F59A91; --bad-soft:#341716;
+    --warn:#E8A93F; --warn-ink:#F2C26E; --warn-soft:#30240F;
+    --on-status:#0D1220; --scrim:rgba(0,0,0,.6); --shadow:0 20px 50px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1220; --surface:#151B2D; --sheet:#111727;
+  --ink:#E6EAF4; --ink-2:#AAB4CA; --muted:#808AA2;
+  --line:#262F46; --line-strong:#3A4460; --track:#222B42; --chip:#1E263B;
+  --accent:#7F9CF5; --accent-hover:#99B0F8; --accent-ink:#A9BCFA; --accent-soft:#1C2747; --on-accent:#0D1220;
+  --ok:#3FBF7F; --ok-ink:#6FD6A0; --ok-soft:#13291F;
+  --bad:#EF6F64; --bad-ink:#F59A91; --bad-soft:#341716;
+  --warn:#E8A93F; --warn-ink:#F2C26E; --warn-soft:#30240F;
+  --on-status:#0D1220; --scrim:rgba(0,0,0,.6); --shadow:0 20px 50px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 15px/1.55 var(--f-ui);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3{text-wrap:balance}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{margin:0;font:600 12px/1.3 var(--f-ui);text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.note{margin:0;font-size:13px;color:var(--warn-ink)}
+
+/* ---------- bar ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:700 22px/1 var(--f-display);flex:none;padding-bottom:3px}
+.brand-t{display:flex;flex-direction:column;font:700 15px/1.15 var(--f-display);white-space:nowrap}
+.brand-t small{font:500 12px/1.2 var(--f-ui);color:var(--muted)}
+.bar-spacer{flex:1}
+.tabs{display:flex;gap:4px;flex:1;justify-content:center;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;border:1px solid transparent;background:none;color:var(--ink-2);font:500 14px var(--f-ui);cursor:pointer;white-space:nowrap}
+.tab:hover{background:var(--chip)}
+.tab-n{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--f-ui);border:1.5px solid var(--line-strong)}
+.tab-c{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12.5px}
+.tab.active{background:var(--accent-soft);color:var(--accent-ink);border-color:transparent}
+.tab.active .tab-n{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.clock{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
+.clock-l{font:600 10.5px var(--f-ui);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.timer{font:700 23px/1.1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--ink)}
+.timer.warn{color:var(--warn)}
+.timer.crit{color:var(--bad)}
+@media (max-width:780px){
+  .bar-in.test{display:grid;grid-template-columns:1fr auto auto;grid-template-areas:"brand clock submit" "tabs tabs tabs";row-gap:8px;column-gap:12px}
+  .bar-in.test .brand{grid-area:brand}
+  .bar-in.test .tabs{grid-area:tabs;justify-content:flex-start}
+  .bar-in.test .clock{grid-area:clock}
+  .bar-in.test .btn-submit{grid-area:submit}
+  .bar-in.test .brand-t small{display:none}
+}
+@media (max-width:420px){ .bar-in.test .brand-t{display:none} }
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 14px/1.2 var(--f-ui);padding:9px 16px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--ink-2)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn-lg{font-size:16px;padding:14px 26px;border-radius:10px}
+.btn-link{border:0;background:none;padding:0;color:var(--accent-ink);font:600 13px var(--f-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+/* ---------- page ---------- */
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 88px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px clamp(16px,3vw,24px)}
+.h2{font:700 20px/1.2 var(--f-display);margin:0 0 10px}
+
+/* ---------- intro ---------- */
+.intro{display:flex;flex-direction:column;gap:28px}
+.hero{display:flex;flex-direction:column;gap:14px;max-width:780px;padding-top:12px}
+.hero-t{margin:0;font:800 clamp(36px,6.4vw,60px)/1 var(--f-display);letter-spacing:-.025em}
+.hero-t em{font-style:normal;color:var(--accent-ink)}
+.lede{margin:0;font-size:17.5px;line-height:1.6;color:var(--ink-2);max-width:64ch}
+.cefr{display:flex;flex-direction:column;gap:6px;max-width:520px;margin-top:6px}
+.cefr-row{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.cefr-c{padding:7px 0;text-align:center;font:700 14px/1 var(--f-display);border-radius:6px;background:var(--accent-soft);color:var(--accent-ink)}
+.cefr-c.out{background:transparent;box-shadow:inset 0 0 0 1px var(--line-strong);color:var(--muted)}
+.cefr-cap{margin:0;font-size:12.5px;color:var(--muted)}
+.cefr.res .cefr-c{background:var(--track);color:var(--muted);box-shadow:none}
+.cefr.res .cefr-c.reached{background:var(--accent-soft);color:var(--accent-ink)}
+.cefr.res .cefr-c.here{background:var(--accent);color:var(--on-accent)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.pcard-n{margin:0;font:700 12px var(--f-ui);text-transform:uppercase;letter-spacing:.09em;color:var(--accent-ink)}
+.pcard-t{margin:2px 0 0;font:700 19px/1.2 var(--f-display)}
+.pcard-it{margin:0;color:var(--muted);font-size:14px}
+.pcard-s{margin:8px 0 0;font-size:13.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:820px){.two{grid-template-columns:minmax(0,1fr)}}
+.rules ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.rules li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;color:var(--ink-2)}
+.rules li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);margin-top:8px}
+.audio p{margin:0 0 12px;color:var(--ink-2)}
+.ac-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ac-row label{font-weight:600;font-size:13px}
+.ac-row select{flex:1;min-width:0;max-width:100%;font:500 14px var(--f-ui);padding:8px 10px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink)}
+.ac-status{margin:10px 0 0 !important;font-size:13px}
+.ac-status.warn{color:var(--warn-ink)}
+.ac-status.ok{color:var(--ok-ink)}
+.start{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.start-note{margin:0;color:var(--muted);font-size:13.5px}
+
+/* ---------- test ---------- */
+.test-grid{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:40px;align-items:start}
+.col{max-width:780px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.sheet{position:sticky;top:calc(env(safe-area-inset-top,0px) + 80px)}
+@media (max-width:980px){.test-grid{grid-template-columns:minmax(0,1fr)}.sheet{position:static;max-width:780px}}
+.part-head{display:flex;flex-direction:column;gap:8px;padding-bottom:4px}
+.part-title{margin:0;font:800 clamp(28px,4.4vw,38px)/1.05 var(--f-display);letter-spacing:-.02em}
+.instr{margin:0;display:flex;flex-direction:column;gap:2px;max-width:66ch}
+.instr span:first-child{font-size:16px;color:var(--ink)}
+.instr-it{font-size:14px;color:var(--muted)}
+.banner{border-radius:10px;padding:12px 14px;background:var(--warn-soft);color:var(--warn-ink);font-size:14px}
+.task{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px clamp(14px,3vw,26px) 22px;display:flex;flex-direction:column;gap:16px}
+.task-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.task-n{font:700 12.5px var(--f-ui);text-transform:uppercase;letter-spacing:.09em;color:var(--accent-ink)}
+.task-kind{color:var(--muted);font-size:13.5px}
+.task-score{margin-left:auto;font:600 13px var(--f-ui);font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.task-ctx{margin:0;font-family:var(--f-text);font-style:italic;font-size:16px;color:var(--ink-2)}
+.doc{background:var(--sheet);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.doc-meta{margin:0;padding:10px 16px;border-bottom:1px solid var(--line);display:grid;gap:2px;font-size:13px}
+.doc-meta div{display:flex;gap:8px;min-width:0}
+.doc-meta dt{width:52px;flex:none;color:var(--muted)}
+.doc-meta dd{margin:0;color:var(--ink-2);font-weight:600;min-width:0}
+.doc-body{padding:16px 18px 18px;font:400 17px/1.8 var(--f-text);color:var(--ink)}
+.doc-body p{margin:0 0 .85em;max-width:66ch}
+.doc-body p:last-child{margin-bottom:0}
+.doc-source{margin:0;padding:12px 18px 0}
+.doc-title{margin:4px 0 0;padding:0 18px;font:600 23px/1.2 var(--f-text);letter-spacing:-.005em}
+.gap{display:inline-flex;align-items:baseline;gap:3px;font:600 15px/1.45 var(--f-ui);color:var(--accent-ink);background:var(--accent-soft);border:0;border-bottom:2px solid var(--accent);border-radius:4px 4px 0 0;padding:0 6px;margin:0 1px;cursor:pointer;vertical-align:baseline}
+.gap sup{font-size:10.5px;font-weight:700;color:var(--muted);top:-.35em}
+.gap:not(.filled){background:transparent;border-bottom-style:dashed}
+.gap:not(.filled) .gap-t{display:inline-block;min-width:3.4em}
+.qs{display:flex;flex-direction:column}
+.q{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;padding-block:12px;border-top:1px solid var(--line)}
+.q:first-child{border-top:0;padding-top:4px}
+.q-n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 12.5px var(--f-ui);border:1.5px solid var(--line-strong);color:var(--ink-2);font-variant-numeric:tabular-nums;flex:none}
+.q.answered .q-n{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.q-body{min-width:0}
+.q-text{margin:3px 0 10px;font-weight:600;line-height:1.45}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts.stack{flex-direction:column;gap:6px}
+.opt{position:relative;display:flex;align-items:center;gap:9px;padding:7px 12px 7px 7px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);cursor:pointer;font-size:15px;line-height:1.35;min-width:0}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.opt-k{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:600 12px var(--f-ui);color:var(--muted);border:1px solid var(--line-strong);flex:none}
+.opt-t{min-width:0}
+.opt:hover{border-color:var(--accent)}
+.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.opt:has(input:checked) .opt-k{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.opt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.part-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* player */
+.player{display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:10px;background:var(--sheet);border:1px solid var(--line)}
+.play{width:54px;height:54px;border-radius:50%;background:var(--accent);color:var(--on-accent);border:0;display:grid;place-items:center;cursor:pointer;flex:none}
+.play:hover:not(:disabled){background:var(--accent-hover)}
+.play:disabled{background:var(--track);color:var(--muted);cursor:not-allowed}
+.play.is-playing:disabled{background:var(--accent);color:var(--on-accent);cursor:default}
+.player-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.player-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.player-title{font-weight:600}
+.pips{display:flex;gap:5px;align-items:center;font-size:12px;color:var(--muted)}
+.pip{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+.pip.used{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.prog{height:4px;background:var(--track);border-radius:2px;overflow:hidden}
+.prog span{display:block;height:100%;width:0;background:var(--accent);border-radius:2px;transition:width .35s ease}
+.player-status{font-size:13px;color:var(--ink-2)}
+.player-status.err{color:var(--bad-ink)}
+.eq{display:flex;gap:3px;align-items:flex-end;height:18px}
+.eq i{width:4px;background:currentColor;border-radius:2px;animation:eq 0.9s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}
+@keyframes eq{0%,100%{height:5px}50%{height:18px}}
+.tx-row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:13px;color:var(--muted)}
+.tx-box{background:var(--warn-soft);color:var(--warn-ink);border-radius:8px;padding:12px 14px;font-size:14px;display:flex;flex-direction:column;gap:10px}
+.tx-box .row{display:flex;gap:8px;flex-wrap:wrap}
+.tx{background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font:400 16px/1.7 var(--f-text)}
+.tx p{margin:0 0 .5em}.tx p:last-child{margin:0}
+.tx b{font-family:var(--f-ui);font-size:13px;color:var(--ink-2)}
+
+/* answer sheet */
+.sheet-in{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.sheet-title{margin:0;font:700 16px/1.2 var(--f-display)}
+.sheet-sub{margin:2px 0 6px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sheet-part{margin-top:12px}
+.sheet-label{margin:0 0 6px;font:600 11.5px var(--f-ui);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.sheet-part.current .sheet-label{color:var(--accent-ink)}
+.bubbles{display:grid;grid-template-columns:repeat(auto-fill,minmax(27px,1fr));gap:6px}
+.bub{aspect-ratio:1;width:100%;max-width:34px;border-radius:50%;border:1.5px solid var(--line-strong);background:none;font:600 11px/1 var(--f-ui);color:var(--ink-2);cursor:pointer;padding:0;font-variant-numeric:tabular-nums}
+.bub:hover{border-color:var(--accent)}
+.bub.on{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.bub.ok{background:var(--ok);border-color:var(--ok);color:var(--on-status)}
+.bub.bad{background:var(--bad);border-color:var(--bad);color:var(--on-status)}
+.bub.empty{border-style:dashed;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.legend .l-ok{background:var(--ok)}.legend .l-bad{background:var(--bad)}.legend .l-empty{box-shadow:inset 0 0 0 1.5px var(--line-strong)}.legend .l-on{background:var(--ink)}
+
+/* dialog */
+.overlay{position:fixed;inset:0;background:var(--scrim);display:grid;place-items:center;z-index:50;padding:16px}
+.dialog{background:var(--surface);border-radius:14px;padding:22px;max-width:440px;width:100%;border:1px solid var(--line);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.dialog h2{margin:0;font:700 21px/1.2 var(--f-display)}
+.dialog p{margin:0;color:var(--ink-2)}
+.dlg-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:6px}
+
+/* ---------- results ---------- */
+.res{display:flex;flex-direction:column;gap:44px}
+.res-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.res-hero{grid-template-columns:minmax(0,1fr)}}
+.level-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px clamp(18px,3vw,28px);display:flex;flex-direction:column;gap:12px}
+.level-row{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.level-big{font:800 clamp(72px,13vw,112px)/.85 var(--f-display);color:var(--accent-ink);letter-spacing:-.04em}
+.level-q{margin:0 0 6px;font:600 16px/1.35 var(--f-ui);color:var(--ink-2)}
+.level-d{margin:0;color:var(--ink-2);max-width:60ch}
+.caveat{margin:0;font-size:12.5px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:14px;overflow:hidden;border:1px solid var(--line);align-content:stretch}
+.stat{background:var(--surface);padding:16px 18px;display:flex;flex-direction:column;gap:2px;justify-content:center}
+.stat-v{font:700 30px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.stat-v small{font:600 15px var(--f-ui);color:var(--muted)}
+.stat-l{font-size:13px;color:var(--muted)}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sec-h{margin:0;font:800 26px/1.15 var(--f-display);letter-spacing:-.015em}
+.sec-sub{margin:-8px 0 0;color:var(--muted);max-width:70ch}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.rcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.rcard-t{margin:0;font:700 18px/1.2 var(--f-display)}
+.rcard-v{margin:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;color:var(--ink-2);font-size:13.5px;font-variant-numeric:tabular-nums}
+.rcard-v .big{font:800 34px/1 var(--f-display);color:var(--ink)}
+.mlist{display:flex;flex-direction:column;gap:12px}
+.mrow{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr) 104px auto;gap:14px;align-items:center}
+.mrow-l{font-weight:600;min-width:0}
+.mrow-l small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+.mrow-v{font-variant-numeric:tabular-nums;color:var(--ink-2);font-size:14px;text-align:right;white-space:nowrap}
+.mrow-v small{color:var(--muted)}
+.mlist.no-chip .mrow{grid-template-columns:minmax(120px,210px) minmax(0,1fr) 104px}
+@media (max-width:600px){
+  .mrow,.mlist.no-chip .mrow{grid-template-columns:minmax(0,1fr) auto;row-gap:6px}
+  .mrow .meter{grid-column:1 / -1;grid-row:2}
+  .mrow .chip{justify-self:start}
+}
+.meter{position:relative;height:10px;background:var(--track);border-radius:5px}
+.meter-fill{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:5px;min-width:0}
+.meter-thr{position:absolute;top:-4px;bottom:-4px;width:2px;margin-left:-1px;background:var(--ink-2);border-radius:1px}
+.chip{display:inline-flex;align-items:center;gap:4px;font:600 11.5px/1.2 var(--f-ui);padding:3px 9px;border-radius:999px;background:var(--chip);color:var(--ink-2);white-space:nowrap}
+.chip.pass{background:var(--ok-soft);color:var(--ok-ink)}
+.chip.fail{background:var(--bad-soft);color:var(--bad-ink)}
+.chip.lvl{background:var(--accent-soft);color:var(--accent-ink)}
+.mfoot{margin:0;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.mfoot i{display:inline-block;width:2px;height:14px;background:var(--ink-2)}
+.improve{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:860px){.improve{grid-template-columns:minmax(0,1fr)}}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.box h3{margin:0;font:700 17px/1.25 var(--f-display)}
+.box p{margin:0;color:var(--ink-2)}
+.box.wide{grid-column:1 / -1}
+.gapnum{font:800 40px/1 var(--f-display);color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.pri{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;counter-reset:pri}
+.pri li{counter-increment:pri;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;padding-block:14px;border-top:1px solid var(--line)}
+.pri li:first-child{border-top:0;padding-top:4px}
+.pri li::before{content:counter(pri);width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:700 14px var(--f-display)}
+.pri-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.pri-head strong{font:700 16.5px var(--f-display)}
+.pri-head span{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pri p{margin:4px 0 0;color:var(--ink-2)}
+.pri-gain{font-size:14px}
+.jump{border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);border-radius:999px;font:600 12px var(--f-ui);padding:2px 9px;margin:2px 2px 0 0;cursor:pointer;font-variant-numeric:tabular-nums}
+.jump:hover{border-color:var(--accent);color:var(--accent-ink)}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;align-self:flex-start}
+.seg button{padding:8px 14px;border:0;background:var(--surface);font:600 13px var(--f-ui);color:var(--ink-2);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line-strong)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.rv-part{display:flex;flex-direction:column;gap:14px}
+.rv-part-h{margin:8px 0 0;font:700 19px/1.2 var(--f-display)}
+.review[data-show="wrong"] .rv-item.is-ok{display:none}
+.review[data-show="wrong"] .rv-task.allok{display:none}
+.rv-item{padding-block:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;border-radius:4px}
+.rv-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.v-ok{color:var(--ok-ink);font-weight:700;font-size:14px}
+.v-bad{color:var(--bad-ink);font-weight:700;font-size:14px}
+.v-empty{color:var(--warn-ink);font-weight:700;font-size:14px}
+.rv-q{margin:0;font-weight:600}
+.rv-ans{margin:0;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:14.5px}
+.rv-ans .a-bad{color:var(--bad-ink)}
+.rv-ans .a-ok{color:var(--ok-ink)}
+.rv-why{margin:0;color:var(--ink-2);font-size:14.5px;max-width:72ch}
+.rv-item.flash{animation:flash 1.8s ease-out}
+@keyframes flash{0%,40%{background:var(--accent-soft)}100%{background:transparent}}
+.fill{font-family:var(--f-ui);font-size:15px;font-weight:600;border-radius:3px;padding:0 4px;text-decoration:none}
+.fill sup{font-size:10px;color:var(--muted);margin-right:2px}
+mark.fill.ok{background:var(--ok-soft);color:var(--ok-ink)}
+mark.fill.miss{background:var(--warn-soft);color:var(--warn-ink)}
+s.fill.bad{background:var(--bad-soft);color:var(--bad-ink);text-decoration:line-through;text-decoration-thickness:2px;margin-right:3px}
+details.txd summary{cursor:pointer;font-weight:600;color:var(--accent-ink);font-size:14px}
+details.txd[open] summary{margin-bottom:10px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table.hist{border-collapse:collapse;width:100%;min-width:520px;font-size:14px;font-variant-numeric:tabular-nums}
+table.hist th,table.hist td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+table.hist th{font:600 12px var(--f-ui);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+table.hist tr:last-child td{border-bottom:0}
+table.hist td.num,table.hist th.num{text-align:right}
+.res-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+</style>
+<style>html{color-scheme:light}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= DATA ================= */
+const LEVELS = ["A2","B1","B2","C1"];
+const DURATION = 30 * 60 * 1000;
+const KEY = "ele-prueba-v1", HKEY = "ele-prueba-hist-v1", VKEY = "ele-prueba-voz";
+const LET = ["a","b","c","d"];
+
+const PARTS = [
+  { name:"Gramática y vocabulario", short:"Gramática", it:"Grammatica e lessico in contesto", struct:"5 testi · 25 spazi da completare", suggested:12,
+    es:"Lee los textos y elige la opción correcta para cada hueco.", itx:"Leggi i testi e scegli l'opzione corretta per ogni spazio. Puoi toccare uno spazio nel testo per andare alla sua domanda." },
+  { name:"Comprensión de lectura", short:"Lectura", it:"Comprensione scritta", struct:"3 testi · 12 domande", suggested:9,
+    es:"Lee los textos y responde a las preguntas.", itx:"Leggi i testi e rispondi alle domande scegliendo l'opzione corretta." },
+  { name:"Comprensión auditiva", short:"Audición", it:"Comprensione orale", struct:"4 audio · 12 domande", suggested:9,
+    es:"Escucharás cuatro audios. Puedes escuchar cada uno dos veces.", itx:"Leggi le domande prima di premere play: ogni audio si può ascoltare al massimo due volte." }
+];
+
+const TASKS = [
+/* ---------- PRUEBA 1 ---------- */
+{ id:"g1", part:0, label:"Correo electrónico", meta:{de:"Lucía", para:"Marta", asunto:"¡Ya tengo piso!"},
+  text:`¡Hola, Marta!
+
+¿Qué tal todo por Bolonia? Yo [[1]] muy contenta porque por fin he encontrado piso en Valencia. Es pequeño, pero está [[2]] cinco minutos de la playa. El sábado pasado [[3]] la mudanza con mi hermano y terminamos agotados. Mis compañeros de piso son muy simpáticos. A Jorge le [[4]] mucho cocinar, así que cenamos de maravilla todas las noches. ¿Por qué no vienes a [[5]] en Semana Santa? Tenemos una habitación libre.
+
+Un abrazo enorme,
+Lucía`,
+  items:[
+    {n:1, level:"A2", cat:"Ser ed estar", opts:["soy","estoy","tengo","hay"], a:1, why:"«Estar» + aggettivo esprime uno stato d'animo o una condizione del momento: estoy contenta. «Ser» si usa per caratteristiche stabili e identità."},
+    {n:2, level:"A2", cat:"Preposizioni", opts:["en","de","por","a"], a:3, why:"La distanza si esprime con «estar a + distanza/tempo + de»: está a cinco minutos de la playa."},
+    {n:3, level:"A2", cat:"Tempi del passato", opts:["hacíamos","hicimos","hemos hecho","hacemos"], a:1, why:"«El sábado pasado» indica un tempo concluso → pretérito indefinido (hicimos). Il pretérito perfecto (hemos hecho) non si usa con marcatori come «ayer» o «el … pasado»; l'imperfetto descriverebbe un'abitudine."},
+    {n:4, level:"A2", cat:"Pronomi e verbi come gustar", opts:["gusta","gustan","gusto","gustas"], a:0, why:"Con «gustar» il soggetto grammaticale è ciò che piace. Se è un infinito (cocinar), il verbo va alla 3ª persona singolare: le gusta cocinar."},
+    {n:5, level:"A2", cat:"Pronomi e verbi come gustar", opts:["me ver","mi ver","verme","ver me"], a:2, why:"I pronomi atoni si attaccano all'infinito formando una sola parola: verme (in alternativa, prima del verbo coniugato: ¿por qué no me vienes a ver?)."}
+  ]},
+{ id:"g2", part:0, label:"Correo electrónico", meta:{de:"Sara", para:"Paula", asunto:"Saludos desde Lisboa"},
+  text:`Querida Paula:
+
+Te escribo desde Lisboa. Cuando [[6]] al hotel ayer por la noche, estaba tan cansada que me dormí enseguida. Esta mañana he ido a ver el barrio de Alfama, [[7]] me habían recomendado tanto. ¡Es precioso! Todavía no he probado el bacalao, pero mañana lo [[8]] sin falta. Por cierto, ¿has hablado ya con Daniel? Me dijo que te [[9]] el lunes, pero no sé si lo hizo. Si al final [[10]] entradas para el concierto, avísame y compro una para mí también.
+
+Besos,
+Sara`,
+  items:[
+    {n:6, level:"B1", cat:"Tempi del passato", opts:["llegaba","he llegado","llegué","llegue"], a:2, why:"Azione puntuale e conclusa (ayer por la noche) → indefinido: llegué. «He llegado» non va con «ayer»; «llegue» è congiuntivo e servirebbe per il futuro (cuando llegue)."},
+    {n:7, level:"B1", cat:"Relativi", opts:["que","quien","cuyo","donde"], a:0, why:"Il relativo riferito a una cosa (el barrio), complemento oggetto di «recomendar», è «que». «Quien» vale solo per persone; «donde» richiederebbe un'azione che avviene in quel luogo."},
+    {n:8, level:"B1", cat:"Futuro e condizionale", opts:["probé","probaba","pruebe","probaré"], a:3, why:"«Mañana» indica un'azione futura → futuro semplice: lo probaré (sarebbe corretto anche il presente «lo pruebo», che però non è tra le opzioni)."},
+    {n:9, level:"B1", cat:"Futuro e condizionale", opts:["llamará","llamaría","llame","ha llamado"], a:1, why:"Discorso indiretto con verbo introduttivo al passato (me dijo): il futuro del discorso diretto («te llamaré») diventa condizionale → te llamaría."},
+    {n:10, level:"B1", cat:"Periodo ipotetico", opts:["consigues","consigas","conseguirás","conseguirías"], a:0, why:"Periodo ipotetico della realtà: «si» + presente indicativo. Dopo il «si» condizionale non si usano mai il congiuntivo presente né il futuro."}
+  ]},
+{ id:"g3", part:0, label:"Mensaje", meta:{de:"Nuria", para:"Irene", asunto:"¡Me han cogido!"},
+  text:`¡Hola, Irene!
+
+¿Te acuerdas de la entrevista de trabajo de la que te hablé? ¡Pues me han cogido! Empiezo el lunes, aunque todavía no me creo que [[11]] verdad. Mi jefa quiere que [[12]] a las ocho el primer día para conocer al equipo. Lo malo es que la oficina está lejísimos; [[13]], el sueldo compensa de sobra el viaje. Este fin de semana quiero celebrarlo. ¿Te apetece que [[14]] a cenar al restaurante peruano [[15]] fuimos en tu cumpleaños?
+
+Un besazo,
+Nuria`,
+  items:[
+    {n:11, level:"B1", cat:"Congiuntivo", opts:["es","será","sea","fuera"], a:2, why:"«No creer que» esprime dubbio o incredulità → congiuntivo. Il riferimento è al presente, quindi congiuntivo presente: no me creo que sea verdad."},
+    {n:12, level:"B1", cat:"Congiuntivo", opts:["llegue","llego","llegaré","llegara"], a:0, why:"Verbo di volontà (querer que) con soggetti diversi → congiuntivo. Principale al presente → congiuntivo presente: quiere que llegue."},
+    {n:13, level:"B1", cat:"Connettivi", opts:["por lo tanto","además","es decir","sin embargo"], a:3, why:"Serve un avversativo: si contrappone un aspetto negativo (la distanza) a uno positivo (lo stipendio) → sin embargo. «Por lo tanto» è conclusivo, «además» aggiunge, «es decir» spiega."},
+    {n:14, level:"B2", cat:"Congiuntivo", opts:["vamos","iremos","vayamos","íbamos"], a:2, why:"«Apetecer que» (come gustar/encantar que) con soggetti diversi regge il congiuntivo: ¿te apetece que vayamos…?"},
+    {n:15, level:"B2", cat:"Relativi", opts:["que","al que","el que","cuyo"], a:1, why:"Il verbo «ir» richiede «a»: fuimos a un restaurante → el restaurante al que fuimos (anche «adonde fuimos»). Il solo «que» senza preposizione è frequente nel parlato ma è considerato scorretto."}
+  ]},
+{ id:"g4", part:0, label:"Correo electrónico", meta:{de:"Elena", para:"Bea", asunto:"Lo de la beca"},
+  text:`Hola, Bea:
+
+Perdona que no te [[16]] antes, pero estas semanas han sido una locura. Te cuento: al final no me dieron la beca. Si [[17]] presentado los documentos a tiempo, seguramente me la habrían concedido, pero me retrasé con el certificado de idiomas. En fin, ya he empezado a buscar otras opciones [[18]] el próximo curso. Mi tutor me aconseja que no me [[19]] por vencida y que lo intente otra vez en primavera. [[20]] tenga noticias, te aviso.
+
+Te echo de menos,
+Elena`,
+  items:[
+    {n:16, level:"B2", cat:"Congiuntivo", opts:["he escrito","habré escrito","habría escrito","haya escrito"], a:3, why:"«Perdona que» esprime una reazione emotiva → congiuntivo. L'azione è anteriore al momento presente → pretérito perfecto de subjuntivo: no te haya escrito."},
+    {n:17, level:"B2", cat:"Periodo ipotetico", opts:["habría","había","hubiera","haya"], a:2, why:"Periodo ipotetico dell'irrealtà nel passato: si + pluscuamperfecto de subjuntivo (hubiera presentado) + condicional compuesto (habrían concedido). Come in italiano, dopo «si» mai il condizionale."},
+    {n:18, level:"B1", cat:"Preposizioni", opts:["por","para","a","hacia"], a:1, why:"«Para» indica finalità e destinazione/scadenza: opzioni per il prossimo anno accademico. «Por» esprime causa, mezzo o un periodo approssimativo."},
+    {n:19, level:"B2", cat:"Congiuntivo", opts:["doy","daré","diera","dé"], a:3, why:"Verbo di consiglio (aconsejar que) → congiuntivo; principale al presente → congiuntivo presente: no me dé por vencida (darse por vencido = arrendersi). L'accento distingue «dé» dalla preposizione «de»."},
+    {n:20, level:"B2", cat:"Connettivi", opts:["En cuanto","Por eso","Desde que","Sin que"], a:0, why:"«En cuanto» (= non appena) + congiuntivo per un'azione futura: en cuanto tenga noticias. «Desde que» indica l'inizio di un periodo e va con l'indicativo; «sin que» non ha senso qui."}
+  ]},
+{ id:"g5", part:0, label:"Correo electrónico", meta:{de:"Inés", para:"Carmen", asunto:"La novela"},
+  text:`Querida Carmen:
+
+Acabo de terminar la novela que me prestaste y, [[21]] lo que me advertiste, no se me ha hecho nada larga. Reconozco que al principio me costó [[22]] el hilo, porque el autor salta continuamente de una época a otra. Sin embargo, a medida que [[23]] avanzando, todo encajaba. Lo único que me chirría es el desenlace: la protagonista vuelve con su marido como si nada [[24]] pasado. Me encantaría que lo [[25]] con calma cuando nos veamos.
+
+Un abrazo,
+Inés`,
+  items:[
+    {n:21, level:"C1", cat:"Connettivi", opts:["a fin de","a pesar de","a raíz de","en vez de"], a:1, why:"«A pesar de» introduce una concessione: Carmen l'aveva avvertita che il libro era lungo, ma a Inés non è sembrato. «A raíz de» = in seguito a; «a fin de» = allo scopo di; «en vez de» = invece di."},
+    {n:22, level:"C1", cat:"Lessico ed espressioni", opts:["perder","tirar","cortar","seguir"], a:3, why:"«Seguir el hilo» = seguire il filo (della trama). «Perder el hilo» esiste ma significa il contrario e qui non ha senso («mi è costato perdere il filo»); «tirar del hilo» = indagare, e richiede «del»."},
+    {n:23, level:"B2", cat:"Tempi del passato", opts:["voy","vaya","iba","irá"], a:2, why:"Perifrasi «ir + gerundio» (progressione graduale) all'imperfetto, in parallelo con «encajaba»: a medida que iba avanzando. L'imperfetto descrive un processo in corso nel passato."},
+    {n:24, level:"C1", cat:"Congiuntivo", opts:["hubiera","habría","había","haya"], a:0, why:"«Como si» richiede sempre il congiuntivo imperfetto o trapassato. Qui l'azione è anteriore → pluscuamperfecto de subjuntivo: como si nada hubiera pasado."},
+    {n:25, level:"B2", cat:"Congiuntivo", opts:["comentemos","comentaremos","comentaríamos","comentáramos"], a:3, why:"Con un verbo principale al condizionale (me encantaría que) la subordinata va al congiuntivo imperfetto: me encantaría que lo comentáramos."}
+  ]},
+
+/* ---------- PRUEBA 2 ---------- */
+{ id:"r1", part:1, label:"Correo electrónico", meta:{de:"Alba", para:"Clara", asunto:"Cambio de planes"},
+  text:`Hola, Clara:
+
+Te escribo para contarte el plan del sábado. Al final no vamos a ir a la sierra porque dan lluvia todo el fin de semana. Pablo ha propuesto ir al cine por la tarde y luego cenar en su casa. Yo prefería ir a un museo, pero los demás no tenían muchas ganas. Quedamos a las seis en la puerta del cine Ideal. La película empieza a las seis y media, así que no llegues tarde, que te conozco. Pablo dice que no hace falta llevar nada para la cena, pero yo llevaré un postre.
+
+Besos,
+Alba`,
+  items:[
+    {n:26, level:"A2", cat:"Informazione specifica", q:"¿Por qué han cambiado el plan del sábado?", opts:["Porque Pablo está enfermo.","Porque se espera mal tiempo.","Porque la sierra está cerrada.","Porque Clara no puede ir."], a:1, why:"«No vamos a ir a la sierra porque dan lluvia todo el fin de semana». «Dar lluvia» = le previsioni danno pioggia."},
+    {n:27, level:"A2", cat:"Informazione specifica", q:"¿Qué alternativa prefería Alba?", opts:["Ir al cine.","Cenar en casa de Pablo.","Ir a la sierra.","Visitar un museo."], a:3, why:"«Yo prefería ir a un museo, pero los demás no tenían muchas ganas». Il cinema è la proposta di Pablo."},
+    {n:28, level:"A2", cat:"Informazione specifica", q:"¿A qué hora tiene que estar Clara en la puerta del cine?", opts:["A las seis.","A las seis y media.","A las siete.","A las cinco y media."], a:0, why:"«Quedamos a las seis en la puerta del cine». Alle sei e mezza inizia il film: è il distrattore."},
+    {n:29, level:"B1", cat:"Inferenza e intenzione", q:"¿Qué se puede deducir sobre Clara?", opts:["Que no le gusta el cine.","Que tiene que llevar el postre.","Que suele llegar tarde.","Que vive cerca del cine."], a:2, why:"«No llegues tarde, que te conozco»: Alba conosce l'abitudine di Clara di arrivare in ritardo. Il dolce lo porta Alba, non Clara."}
+  ]},
+{ id:"r2", part:1, label:"Artículo de prensa", meta:{kind:"article", source:"Sociedad", title:"El auge de las ciudades medianas"},
+  text:`Durante décadas, mudarse a Madrid o Barcelona era casi obligatorio para quien quería prosperar profesionalmente. Sin embargo, desde que el teletrabajo se generalizó, ciudades como Valladolid, Cáceres o Logroño están recibiendo a jóvenes profesionales que buscan alquileres más asequibles y una vida menos acelerada. No todo son ventajas: muchos echan de menos la oferta cultural de las grandes capitales y se quejan de que las conexiones de transporte siguen siendo deficientes. Aun así, según una encuesta reciente, siete de cada diez recién llegados no piensan volver. Los alcaldes, conscientes de la oportunidad, ya compiten por atraer a estos nuevos vecinos con ayudas a la vivienda y espacios de coworking.`,
+  items:[
+    {n:30, level:"B1", cat:"Idea principale", q:"Según el texto, ¿qué ha favorecido la llegada de jóvenes profesionales a estas ciudades?", opts:["Unos salarios más altos.","La generalización del teletrabajo.","La mejora de los transportes.","Las ayudas de la Unión Europea."], a:1, why:"«Desde que el teletrabajo se generalizó, ciudades como Valladolid… están recibiendo a jóvenes profesionales». I trasporti, al contrario, sono descritti come carenti."},
+    {n:31, level:"B1", cat:"Informazione specifica", q:"¿Cuál de estos inconvenientes menciona el texto?", opts:["Los alquileres son caros.","Hay poco empleo.","Hay mucho ruido en las calles.","La oferta cultural es más limitada."], a:3, why:"«Muchos echan de menos la oferta cultural de las grandes capitales». Gli affitti, invece, sono «más asequibles» (più abbordabili)."},
+    {n:32, level:"B2", cat:"Inferenza e intenzione", q:"Con la frase «No todo son ventajas», el autor…", opts:["introduce los aspectos negativos del fenómeno.","afirma que mudarse es un error.","pone en duda los datos de la encuesta.","critica la actuación de los alcaldes."], a:0, why:"È una formula di transizione che introduce il contrappunto negativo (cultura, trasporti) senza negare il fenomeno; subito dopo arriva «Aun así…»."},
+    {n:33, level:"B2", cat:"Informazione specifica", q:"¿Qué indica la encuesta citada?", opts:["Que el 70 % volverá a la gran ciudad.","Que la mayoría de los recién llegados quiere quedarse.","Que siete de cada diez alcaldes ofrecen ayudas.","Que los jóvenes siguen prefiriendo Madrid."], a:1, why:"«Siete de cada diez recién llegados no piensan volver» = il 70% vuole restare. L'opzione sul 70% che torna inverte il dato."}
+  ]},
+{ id:"r3", part:1, label:"Correo electrónico", meta:{de:"Lola", para:"Marina", asunto:"La comida del domingo"},
+  text:`Querida Marina:
+
+Ya ha pasado la famosa comida familiar del domingo y, como era de esperar, mi tía Remedios no defraudó. Nada más llegar, me preguntó por enésima vez cuándo pensaba «sentar la cabeza», como si tener treinta y cuatro años y un trabajo que me apasiona fuera un drama. Mi madre, fiel a su costumbre, cambió de tema hablando del tiempo, y mi hermano aprovechó para escaquearse a la cocina. Lo curioso es que, al final de la tarde, Remedios me llevó aparte y me confesó que ella, a mi edad, habría dado cualquier cosa por tener mi libertad. Me quedé sin palabras. A veces juzgamos a la gente con demasiada prisa.
+
+Un beso,
+Lola`,
+  items:[
+    {n:34, level:"C1", cat:"Inferenza e intenzione", q:"Cuando Lola dice que su tía «no defraudó», quiere decir que…", opts:["la tía la sorprendió para bien.","la tía no fue a la comida.","la tía se comportó exactamente como se esperaba.","la tía le hizo un regalo."], a:2, why:"È ironico: «como era de esperar, mi tía no defraudó» significa che la zia ha fatto esattamente ciò che Lola si aspettava, cioè la solita domanda indiscreta."},
+    {n:35, level:"C1", cat:"Lessico ed espressioni", q:"En el texto, «sentar la cabeza» significa…", opts:["descansar más.","cambiar de trabajo.","mudarse a otra ciudad.","llevar una vida más estable y convencional."], a:3, why:"«Sentar la cabeza» = mettere la testa a posto: sistemarsi, sposarsi, fare una vita più convenzionale. Lo conferma «como si tener treinta y cuatro años… fuera un drama»."},
+    {n:36, level:"B2", cat:"Lessico ed espressioni", q:"¿Qué hizo el hermano de Lola?", opts:["Se fue a la cocina para evitar la situación.","Defendió a Lola delante de la tía.","Cambió de tema y habló del tiempo.","Discutió con su madre."], a:0, why:"«Escaquearse» = svignarsela, sottrarsi a una situazione scomoda. Chi cambia argomento parlando del tempo è la madre."},
+    {n:37, level:"B2", cat:"Idea principale", q:"¿Qué reflexión hace Lola al final del correo?", opts:["Que su tía nunca va a cambiar.","Que debería casarse pronto.","Que había juzgado a su tía con demasiada rapidez.","Que no volverá a las comidas familiares."], a:2, why:"Dopo la confessione della zia («habría dado cualquier cosa por tener mi libertad») Lola conclude: «A veces juzgamos a la gente con demasiada prisa»."}
+  ]},
+
+/* ---------- PRUEBA 3 ---------- */
+{ id:"l1", part:2, label:"Mensaje de voz", context:"Escucharás un mensaje que Marta deja en el buzón de voz de su amiga Laura.",
+  track:{ rate:0.92, speakers:[{name:"Marta", g:"f"}], lines:[
+    {s:0, t:"Hola, Laura, soy Marta. Te llamo porque mañana no puedo quedar a las cinco, como habíamos dicho. Tengo que llevar a mi abuela al médico. ¿Te va bien a las siete? Podemos vernos en la cafetería de la plaza, la que está al lado de la farmacia. Ah, y no te olvides de traerme el libro de inglés, que el lunes tengo examen. Llámame cuando escuches esto. ¡Un beso!"}
+  ]},
+  items:[
+    {n:38, level:"A2", cat:"Informazione specifica", q:"¿Por qué Marta no puede quedar a las cinco?", opts:["Porque tiene un examen.","Porque trabaja hasta tarde.","Porque tiene que acompañar a su abuela al médico.","Porque está enferma."], a:2, why:"«Tengo que llevar a mi abuela al médico». L'esame è lunedì e riguarda il libro, non l'appuntamento."},
+    {n:39, level:"A2", cat:"Informazione specifica", q:"¿A qué hora propone quedar?", opts:["A las siete.","A las cinco.","A las seis.","A las ocho."], a:0, why:"«¿Te va bien a las siete?». Le cinque era l'orario originale, ora annullato."},
+    {n:40, level:"A2", cat:"Informazione specifica", q:"¿Qué tiene que llevar Laura?", opts:["Unas medicinas para la abuela.","Un libro de inglés.","Un regalo.","Los apuntes de matemáticas."], a:1, why:"«No te olvides de traerme el libro de inglés, que el lunes tengo examen». La farmacia serve solo a indicare dove si trova la caffetteria."}
+  ]},
+{ id:"l2", part:2, label:"Aviso por megafonía", context:"Escucharás un aviso por megafonía en una estación de tren.",
+  track:{ rate:0.97, speakers:[{name:"Megafonía", g:null}], lines:[
+    {s:0, t:"Atención, señores pasajeros. Les informamos de que el tren de larga distancia con destino a Santander, con salida prevista a las diez y cuarto, sufrirá un retraso de aproximadamente cuarenta minutos debido a una incidencia técnica. Los pasajeros con conexión en Palencia pueden dirigirse al punto de información, situado junto a la vía uno, donde se les ofrecerá una alternativa. Rogamos disculpen las molestias. Les recordamos que, por su seguridad, no deben dejar el equipaje desatendido."}
+  ]},
+  items:[
+    {n:41, level:"B1", cat:"Informazione specifica", q:"¿A qué hora saldrá aproximadamente el tren?", opts:["A las diez y cuarto.","A las diez y cuarenta.","A las once menos cinco.","A las once y cuarto."], a:2, why:"Partenza prevista alle 10:15 («diez y cuarto») + circa 40 minuti di ritardo = 10:55, cioè «las once menos cinco»."},
+    {n:42, level:"B1", cat:"Informazione specifica", q:"¿Cuál es la causa del retraso?", opts:["Una incidencia técnica.","El mal tiempo.","Una huelga.","Obras en la vía."], a:0, why:"«…debido a una incidencia técnica». «Incidencia» = guasto, inconveniente."},
+    {n:43, level:"B1", cat:"Informazione specifica", q:"¿Qué deben hacer los pasajeros con conexión en Palencia?", opts:["Esperar en la vía uno.","Comprar otro billete.","Cambiar de tren en Santander.","Ir al punto de información."], a:3, why:"«Pueden dirigirse al punto de información, situado junto a la vía uno». La vía uno indica solo dove si trova il punto informazioni."}
+  ]},
+{ id:"l3", part:2, label:"Conversación", context:"Escucharás una conversación entre dos amigos, Javi y Andrea.",
+  track:{ rate:1, speakers:[{name:"Javi", g:"m"},{name:"Andrea", g:"f"}], lines:[
+    {s:0, t:"Oye, Andrea, ¿al final aceptaste el trabajo en Bilbao?"},
+    {s:1, t:"Todavía no. Me pagan bastante más, pero tendría que dejar el piso y empezar de cero allí."},
+    {s:0, t:"Ya, pero llevas meses quejándote de tu jefe. Yo que tú no me lo pensaría dos veces."},
+    {s:1, t:"Ya lo sé, pero lo que más me frena es mi padre. Desde que se jubiló está bastante solo, y no quiero dejarlo así."},
+    {s:0, t:"¿Y si le propones que pase temporadas contigo? A lo mejor le viene bien cambiar de aires."},
+    {s:1, t:"Pues mira, no se me había ocurrido. Se lo comento este fin de semana."}
+  ]},
+  items:[
+    {n:44, level:"B2", cat:"Informazione specifica", q:"¿Qué ventaja tiene el trabajo en Bilbao?", opts:["Está cerca de su familia.","Le ofrecen un piso.","El sueldo es más alto.","Tendría un jefe más simpático."], a:2, why:"«Me pagan bastante más». Del capo attuale Andrea si lamenta, ma del nuovo non si dice nulla."},
+    {n:45, level:"B2", cat:"Idea principale", q:"¿Qué es lo que más frena a Andrea?", opts:["No quiere dejar solo a su padre.","Le da miedo el clima de Bilbao.","No quiere perder a sus amigos.","No quiere dejar a su jefe."], a:0, why:"«Lo que más me frena es mi padre. Desde que se jubiló está bastante solo». «Frenar» = trattenere; «jubilarse» = andare in pensione."},
+    {n:46, level:"B2", cat:"Inferenza e intenzione", q:"¿Cómo reacciona Andrea a la propuesta de Javi?", opts:["La rechaza porque su padre no quiere viajar.","Se enfada con Javi.","Dice que ya lo había pensado.","Le parece una buena idea que no había considerado."], a:3, why:"«Pues mira, no se me había ocurrido. Se lo comento este fin de semana»: l'idea le piace e ne parlerà al padre."}
+  ]},
+{ id:"l4", part:2, label:"Programa de radio", context:"Escucharás un fragmento de un programa de radio sobre los hábitos de lectura.",
+  track:{ rate:1, speakers:[{name:"Radio", g:null}], lines:[
+    {s:0, t:"Se suele decir que los jóvenes ya no leen, pero los datos cuentan otra historia. Según el último barómetro, el porcentaje de lectores entre los dieciocho y los veinticuatro años es el más alto de todas las franjas de edad. Lo que sí ha cambiado es el modo de leer: se alterna el papel con la pantalla, y los libros se descubren más a través de las redes sociales que en las librerías. Ahora bien, conviene no caer en el triunfalismo. Una cosa es leer con frecuencia y otra muy distinta es leer con atención. Los profesores advierten de que a los alumnos les cuesta cada vez más concentrarse en textos largos y complejos."}
+  ]},
+  items:[
+    {n:47, level:"C1", cat:"Idea principale", q:"Según el locutor, la idea de que los jóvenes ya no leen…", opts:["está confirmada por el último barómetro.","no se corresponde con los datos.","solo es cierta para los menores de edad.","la defienden sobre todo los profesores."], a:1, why:"«Se suele decir que los jóvenes ya no leen, pero los datos cuentan otra historia»: secondo il barometro sono la fascia d'età che legge di più."},
+    {n:48, level:"C1", cat:"Informazione specifica", q:"¿Qué ha cambiado en los hábitos de lectura de los jóvenes?", opts:["Ya solo leen en pantalla.","Compran más libros en las librerías.","Descubren libros sobre todo a través de las redes sociales.","Leen sobre todo poesía."], a:2, why:"«Se alterna el papel con la pantalla» (quindi non solo schermo) e «los libros se descubren más a través de las redes sociales que en las librerías»."},
+    {n:49, level:"C1", cat:"Inferenza e intenzione", q:"¿Qué quiere decir el locutor con «conviene no caer en el triunfalismo»?", opts:["Que los datos del barómetro son falsos.","Que los jóvenes deberían leer más en papel.","Que las redes sociales perjudican la lectura.","Que no hay que ser demasiado optimistas."], a:3, why:"«Triunfalismo» = ottimismo eccessivo. Subito dopo il locutore ridimensiona il dato: leggere spesso non significa leggere con attenzione."}
+  ]}
+];
+
+const CAT_TIPS = {
+  "Ser ed estar":"Ripassa: ser per identità, origine e caratteristiche; estar per stati, posizione e risultati. Esercitati con gli aggettivi che cambiano significato (ser listo / estar listo, ser malo / estar malo).",
+  "Preposizioni":"Concentrati su por/para e sulle preposizioni rette dai verbi (ir a, pensar en, soñar con, estar a … de). Annota ogni reggenza nuova con una frase d'esempio.",
+  "Tempi del passato":"Contrapponi indefinido (azioni concluse, marcatori come ayer, el año pasado) e imperfecto (descrizioni, abitudini, processi in corso). Prova a riscrivere un breve racconto cambiando i tempi e motivando ogni scelta.",
+  "Pronomi e verbi come gustar":"Ripassa la posizione dei pronomi atoni (attaccati a infinito, gerundio e imperativo affermativo) e la costruzione di gustar, encantar, apetecer, doler.",
+  "Relativi":"Ripassa que / quien / el que / lo que / cuyo e soprattutto la preposizione davanti al relativo: el restaurante al que fuimos, la chica con la que hablé.",
+  "Futuro e condizionale":"Esercitati con il discorso indiretto al passato (dirá → diría, vendrá → vendría) e ripassa i futuri e condizionali irregolari.",
+  "Periodo ipotetico":"Memorizza i tre schemi: si + presente → presente/futuro; si + cong. imperfetto → condizionale; si + cong. trapassato → condizionale composto. Dopo «si» mai condizionale o futuro.",
+  "Congiuntivo":"È l'area che separa B1 da C1. Lavora per famiglie: volontà e consiglio (querer que, aconsejar que), sentimento (perdona que, me apetece que), dubbio (no creer que), temporali future (cuando, en cuanto) e «como si». Cura la concordanza dei tempi con la principale.",
+  "Connettivi":"Classifica i connettivi per funzione (avversativi, consecutivi, concessivi, temporali) e usali attivamente quando scrivi: sin embargo, por lo tanto, a pesar de, en cuanto, aun así.",
+  "Lessico ed espressioni":"Leggi e ascolta materiale autentico (stampa, podcast, serie) annotando le espressioni idiomatiche nel loro contesto, non tradotte parola per parola: sentar la cabeza, seguir el hilo, escaquearse.",
+  "Informazione specifica":"Leggi prima le domande e individua i dati da cercare (orari, cause, oggetti). Diffida delle opzioni che ripetono parole del testo: spesso sono distrattori (un orario o un luogo citati per un altro motivo).",
+  "Idea principale":"Dopo ogni testo o paragrafo riassumi in una frase che cosa vuole dire l'autore. Allenati con articoli d'opinione e interviste brevi.",
+  "Inferenza e intenzione":"Lavora su ironia, tono e sottinteso: chiediti perché l'autore dice qualcosa, non solo che cosa dice. La risposta giusta di solito riformula il testo invece di copiarlo."
+};
+const PART_TIPS = [
+  "Fai esercizi di completamento su testi interi, non su frasi isolate: sono il contesto, i marcatori temporali e i connettivi a decidere la forma corretta.",
+  "Allenati con testi brevi autentici (email, articoli, post): leggi prima le domande, trova il punto del testo che risponde e verifica che l'opzione lo riformuli correttamente.",
+  "Ascolta ogni giorno 10–15 minuti di audio autentico (podcast, notiziari, serie). Primo ascolto senza testo per l'idea generale, secondo per i dettagli (orari, cifre, nomi), poi controlla la trascrizione."
+];
+const LDESC = {
+  A1:"Le strutture di base vanno ancora consolidate: concentrati su presente, ser/estar, gustar e lessico quotidiano prima di passare al livello successivo.",
+  A2:"Gestisci situazioni quotidiane semplici: messaggi brevi, piani, routine. Il passo successivo sono i tempi del passato in contesto e le prime strutture con il congiuntivo.",
+  B1:"Te la cavi nella maggior parte delle situazioni quotidiane e capisci i punti principali di testi chiari. Il confine verso B2 passa per congiuntivo, periodo ipotetico e lettura del sottinteso.",
+  B2:"Comprendi testi complessi e usi la lingua con scioltezza. Per il C1 servono precisione nel congiuntivo, lessico idiomatico e capacità di cogliere ironia e intenzione.",
+  C1:"Usi la lingua in modo flessibile ed efficace e cogli sfumature e ironia. Per una stima C2 serve una prova più lunga e specifica di quella che questo test può offrire."
+};
+
+const ITEMS = [], BYN = {};
+TASKS.forEach(t => t.items.forEach(it => { it.part = t.part; it.task = t.id; ITEMS.push(it); BYN[it.n] = it; }));
+const TRACKS = TASKS.filter(t => t.track);
+const TBY = {}; TASKS.forEach(t => TBY[t.id] = t);
+
+/* ================= HELPERS ================= */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = ms => { const t = Math.max(0, Math.round(ms / 1000)); return String(Math.floor(t / 60)).padStart(2, "0") + ":" + String(t % 60).padStart(2, "0"); };
+const pct = (c, n) => n ? Math.round(c / n * 100) : 0;
+const reduceMotion = () => window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function fresh(){ return { v:1, phase:"intro", startedAt:null, finishedAt:null, answers:{}, plays:{}, transcript:{}, part:0, partTime:[0,0,0], partEnteredAt:null, expired:false, filter:"all" }; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return s; } catch(e){} return null; }
+function loadHist(){ try { const h = JSON.parse(localStorage.getItem(HKEY)); return Array.isArray(h) ? h : []; } catch(e){ return []; } }
+function saveHist(h){ try { localStorage.setItem(HKEY, JSON.stringify(h.slice(-20))); } catch(e){} }
+function getVoicePref(){ try { return localStorage.getItem(VKEY); } catch(e){ return null; } }
+function setVoicePref(v){ try { localStorage.setItem(VKEY, v); } catch(e){} }
+
+let state = fresh();
+const root = document.getElementById("root");
+const remaining = () => state.startedAt ? Math.max(0, DURATION - (Date.now() - state.startedAt)) : DURATION;
+const answeredIn = p => ITEMS.filter(i => i.part === p && state.answers[i.n] != null).length;
+const totalIn = p => ITEMS.filter(i => i.part === p).length;
+const answeredAll = () => ITEMS.filter(i => state.answers[i.n] != null).length;
+
+/* ================= SPEECH ================= */
+const synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+let esVoices = [], voicesReady = false;
+const MALE = ["alvaro","álvaro","pablo","jorge","raul","raúl","dario","darío","carlos","diego","enrique","juan","gerardo","tomas","tomás","alonso","arnau","saul","saúl","jordi","andres","andrés","lorenzo","federico","emilio","gonzalo","francisco","mateo","ivan","iván","male","hombre","rodrigo","sergio","liam"];
+const FEMALE = ["elvira","laura","helena","abril","elena","esperanza","lucia","lucía","monica","mónica","paulina","sabina","dalia","ximena","irene","triana","vera","estrella","marisol","sofia","sofía","catalina","camila","salome","salomé","paloma","beatriz","female","mujer","marta","carmen","paula","valentina","renata","larissa","elsa","nuria","google español","isabela","francisca"];
+function genderOf(v){ const n = v.name.toLowerCase(); if (MALE.some(m => n.includes(m))) return "m"; if (FEMALE.some(f => n.includes(f))) return "f"; return null; }
+function vscore(v){ let s = 0; if (/es[-_]ES/i.test(v.lang)) s += 4; if (/natural|online|neural|premium|enhanced/i.test(v.name)) s += 3; if (/google/i.test(v.name)) s += 1; return s; }
+function refreshVoices(){
+  if (!synth) return;
+  const all = synth.getVoices() || [];
+  if (all.length) voicesReady = true;
+  esVoices = all.filter(v => /^es([-_]|$)/i.test(v.lang)).sort((a, b) => vscore(b) - vscore(a));
+  updateVoiceUI();
+}
+function primaryVoice(){ const p = getVoicePref(); return esVoices.find(v => v.voiceURI === p) || esVoices[0] || null; }
+function voiceFor(g){
+  const p = primaryVoice();
+  if (!g || !p) return { voice:p, pitch: (!p && g === "m") ? 0.85 : 1 };
+  if (genderOf(p) === g) return { voice:p, pitch:1 };
+  const m = esVoices.filter(v => genderOf(v) === g).sort((a, b) => ((b.lang === p.lang) - (a.lang === p.lang)) || (vscore(b) - vscore(a)))[0];
+  if (m) return { voice:m, pitch:1 };
+  return { voice:p, pitch: g === "m" ? 0.8 : 1.12 };
+}
+function splitS(t){ return (t.match(/[^.!?…]+[.!?…]+[»"]?|[^.!?…]+$/g) || [t]).map(s => s.trim()).filter(Boolean); }
+
+let playing = null;
+const keepAlive = [];
+const audioMsg = {};
+function stopSpeech(){
+  if (!synth) return;
+  if (playing){ clearInterval(playing.poll); const id = playing.id; playing = null; refreshPlayers(id); }
+  try { synth.cancel(); } catch(e){}
+}
+function play(id){
+  if (!synth || playing) return;
+  const t = TBY[id]; const used = state.plays[id] || 0;
+  if (used >= 2) return;
+  const chunks = [];
+  t.track.lines.forEach(l => splitS(l.t).forEach(s => chunks.push({ s, g:t.track.speakers[l.s].g })));
+  state.plays[id] = used + 1; save();
+  delete audioMsg[id];
+  playing = { id, started:false, idx:0, total:chunks.length, t0:Date.now(), chars:chunks.reduce((a, c) => a + c.s.length, 0) };
+  keepAlive.length = 0;
+  const go = () => {
+    chunks.forEach((c, i) => {
+      const u = new SpeechSynthesisUtterance(c.s);
+      const vv = voiceFor(c.g);
+      if (vv.voice){ u.voice = vv.voice; u.lang = vv.voice.lang; } else u.lang = "es-ES";
+      u.rate = t.track.rate; u.pitch = vv.pitch;
+      u.onstart = () => { if (playing && playing.id === id){ playing.started = true; playing.idx = i; refreshPlayers(id); } };
+      keepAlive.push(u);
+      synth.speak(u);
+    });
+  };
+  if (synth.speaking || synth.pending){ synth.cancel(); setTimeout(go, 80); } else go();
+  const maxMs = (playing.chars / (11 * t.track.rate)) * 1000 * 2 + 15000;
+  playing.poll = setInterval(() => {
+    if (!playing) return;
+    const busy = synth.speaking || synth.pending;
+    const age = Date.now() - playing.t0;
+    if ((!busy && (playing.started || age > 3000)) || age > maxMs) endPlay(playing.started);
+  }, 400);
+  refreshPlayers();
+}
+function endPlay(ok){
+  if (!playing) return;
+  clearInterval(playing.poll);
+  const id = playing.id;
+  playing = null;
+  if (!ok){
+    state.plays[id] = Math.max(0, (state.plays[id] || 1) - 1); save();
+    audioMsg[id] = "L'audio non è partito: controlla volume e voce. Questo tentativo non è stato conteggiato.";
+  }
+  refreshPlayers();
+}
+
+/* ================= COMPONENTS ================= */
+const ICON_PLAY = '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z" fill="currentColor"/></svg>';
+const EQ = '<span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>';
+
+function paras(text, gapFn){
+  return text.split(/\n\n+/).map(p => "<p>" + esc(p).replace(/\n/g, "<br>").replace(/\[\[(\d+)\]\]/g, (m, n) => gapFn(+n)) + "</p>").join("");
+}
+function docHTML(t, body){
+  if (t.meta.kind === "article")
+    return `<div class="doc article"><p class="eyebrow doc-source">${esc(t.meta.source)}</p><h3 class="doc-title" lang="es">${esc(t.meta.title)}</h3><div class="doc-body" lang="es">${body}</div></div>`;
+  return `<div class="doc letter"><dl class="doc-meta"><div><dt>De</dt><dd>${esc(t.meta.de)}</dd></div><div><dt>Para</dt><dd>${esc(t.meta.para)}</dd></div><div><dt>Asunto</dt><dd lang="es">${esc(t.meta.asunto)}</dd></div></dl><div class="doc-body" lang="es">${body}</div></div>`;
+}
+function gapTest(n){
+  const it = BYN[n], u = state.answers[n];
+  return `<button type="button" class="gap${u != null ? " filled" : ""}" data-gap="${n}" aria-label="Spazio ${n}${u != null ? ": " + esc(it.opts[u]) : ", vuoto"}"><sup>${n}</sup><span class="gap-t">${u != null ? esc(it.opts[u]) : "&nbsp;"}</span></button>`;
+}
+function optsHTML(it, stack){
+  return `<div class="opts${stack ? " stack" : ""}" role="radiogroup" ${stack ? `aria-labelledby="ql-${it.n}"` : `aria-label="Spazio ${it.n}"`} lang="es">${it.opts.map((o, i) =>
+    `<label class="opt" for="q${it.n}-${i}"><input type="radio" name="q${it.n}" id="q${it.n}-${i}" value="${i}"${state.answers[it.n] === i ? " checked" : ""}><span class="opt-k">${LET[i]}</span><span class="opt-t">${esc(o)}</span></label>`).join("")}</div>`;
+}
+function qHTML(it){
+  const ans = state.answers[it.n] != null ? " answered" : "";
+  if (!it.q) return `<div class="q${ans}" id="q-${it.n}"><span class="q-n">${it.n}</span>${optsHTML(it, false)}</div>`;
+  return `<div class="q${ans}" id="q-${it.n}"><span class="q-n">${it.n}</span><div class="q-body"><p class="q-text" id="ql-${it.n}" lang="es">${esc(it.q)}</p>${optsHTML(it, true)}</div></div>`;
+}
+function statusText(id){
+  const used = state.plays[id] || 0;
+  if (playing && playing.id === id) return playing.started ? `In riproduzione · frase ${playing.idx + 1} di ${playing.total}` : "Avvio dell'audio…";
+  if (audioMsg[id]) return audioMsg[id];
+  if (!synth) return "Sintesi vocale non disponibile in questo browser";
+  if (used >= 2) return "Ascolti esauriti";
+  if (used === 1) return "1 ascolto rimasto";
+  return "2 ascolti disponibili";
+}
+function pipsHTML(id){ const used = state.plays[id] || 0; return [0,1].map(i => `<i class="pip${i < used ? " used" : ""}"></i>`).join(""); }
+function playerHTML(t){
+  return `<div class="player" id="pl-${t.id}">
+    <button type="button" class="play" data-play="${t.id}" aria-label="Ascolta: ${esc(t.label)}">${ICON_PLAY}</button>
+    <div class="player-info">
+      <div class="player-top"><span class="player-title" lang="es">${esc(t.label)}</span><span class="pips" id="pips-${t.id}" title="Ascolti disponibili">${pipsHTML(t.id)}</span></div>
+      <div class="prog"><span id="prog-${t.id}"></span></div>
+      <span class="player-status" id="st-${t.id}" aria-live="polite">${statusText(t.id)}</span>
+    </div></div>`;
+}
+function refreshPlayers(){
+  TRACKS.forEach(t => {
+    const id = t.id, btn = $(`[data-play="${id}"]`);
+    if (!btn) return;
+    const used = state.plays[id] || 0;
+    const isMe = playing && playing.id === id;
+    btn.disabled = !synth || used >= 2 || !!playing;
+    btn.classList.toggle("is-playing", !!isMe);
+    btn.innerHTML = isMe ? EQ : ICON_PLAY;
+    const st = $("#st-" + id); if (st){ st.textContent = statusText(id); st.classList.toggle("err", !!audioMsg[id] && !isMe); }
+    const pp = $("#pips-" + id); if (pp) pp.innerHTML = pipsHTML(id);
+    const pr = $("#prog-" + id); if (pr) pr.style.width = isMe && playing.started ? ((playing.idx + 1) / playing.total * 100) + "%" : (used > 0 && !isMe ? "100%" : "0%");
+  });
+}
+function transcriptHTML(t){
+  return `<div class="tx" lang="es">${t.track.lines.map(l => `<p>${t.track.speakers.length > 1 ? `<b>${esc(t.track.speakers[l.s].name)}:</b> ` : ""}${esc(l.t)}</p>`).join("")}</div>`;
+}
+function txBlock(t){
+  if (state.transcript[t.id]) return `<div class="tx-row">Trascrizione mostrata: questo audio sarà segnalato nei risultati.</div>${transcriptHTML(t)}`;
+  return `<div class="tx-row" id="txr-${t.id}"><button type="button" class="btn-link" data-tx="${t.id}">L'audio non funziona?</button></div>`;
+}
+function noVoiceMsg(){
+  if (!synth) return "Questo browser non supporta la sintesi vocale. Usa Chrome o Edge aggiornati per la prova di ascolto.";
+  if (!voicesReady) return "Caricamento delle voci in corso…";
+  if (!esVoices.length) return "Nessuna voce spagnola installata: l'audio userà la voce predefinita, con pronuncia non spagnola. Su Windows, Microsoft Edge include già voci spagnole naturali; in alternativa aggiungi lo spagnolo in Impostazioni › Ora e lingua › Voce.";
+  return "";
+}
+
+function taskHTML(t, idx){
+  const head = `<header class="task-head"><span class="task-n">Tarea ${idx + 1}</span><span class="task-kind" lang="es">${esc(t.label)}</span></header>`;
+  if (t.track){
+    return `<article class="task" id="task-${t.id}">${head}<p class="task-ctx" lang="es">${esc(t.context)}</p>${playerHTML(t)}<div id="txw-${t.id}">${txBlock(t)}</div><div class="qs">${t.items.map(qHTML).join("")}</div></article>`;
+  }
+  const body = paras(t.text, gapTest);
+  const qs = t.part === 0
+    ? `<div class="qs">${t.items.map(qHTML).join("")}</div>`
+    : `<div class="qs">${t.items.map(qHTML).join("")}</div>`;
+  return `<article class="task" id="task-${t.id}">${head}${docHTML(t, body)}${qs}</article>`;
+}
+function partHTML(p){
+  const P = PARTS[p], tasks = TASKS.filter(t => t.part === p);
+  const warn = p === 2 ? noVoiceMsg() : "";
+  return `<header class="part-head">
+      <p class="eyebrow">Prueba ${p + 1} de 3 · ${totalIn(p)} preguntas · unos ${P.suggested} minutos</p>
+      <h1 class="part-title" lang="es">${P.name}</h1>
+      <p class="instr"><span lang="es">${P.es}</span><span class="instr-it">${P.itx}</span></p>
+      ${warn ? `<div class="banner" id="voice-banner">${esc(warn)}</div>` : ""}
+    </header>
+    ${tasks.map(taskHTML).join("")}
+    <nav class="part-nav" aria-label="Navigazione tra le prove">
+      ${p > 0 ? `<button type="button" class="btn" data-part="${p - 1}">← ${PARTS[p - 1].short}</button>` : "<span></span>"}
+      ${p < 2 ? `<button type="button" class="btn btn-primary" data-part="${p + 1}">Prueba ${p + 2}: ${PARTS[p + 1].short} →</button>` : `<button type="button" class="btn btn-primary" data-submit>Consegna il test</button>`}
+    </nav>`;
+}
+function bubble(it, mode){
+  if (mode === "test"){
+    const on = state.answers[it.n] != null;
+    return `<button type="button" class="bub${on ? " on" : ""}" data-goto="${it.n}" aria-label="Domanda ${it.n}${on ? ", risposta " + LET[state.answers[it.n]] : ", senza risposta"}">${it.n}</button>`;
+  }
+  const u = state.answers[it.n], st = u == null ? "empty" : u === it.a ? "ok" : "bad";
+  const lbl = { ok:"corretta", bad:"errata", empty:"senza risposta" }[st];
+  return `<button type="button" class="bub ${st}" data-jump="${it.n}" aria-label="Domanda ${it.n}: ${lbl}" title="${it.n}: ${lbl}">${it.n}</button>`;
+}
+function sheetHTML(mode){
+  const sub = mode === "test" ? `<span id="sheet-sub">${answeredAll()} di ${ITEMS.length} risposte date</span>` : "Tocca un numero per vedere la correzione";
+  const legend = mode === "test"
+    ? `<div class="legend"><span><i class="l-on"></i>risposta data</span><span><i class="l-empty"></i>da fare</span></div>`
+    : `<div class="legend"><span><i class="l-ok"></i>corretta</span><span><i class="l-bad"></i>errata</span><span><i class="l-empty"></i>senza risposta</span></div>`;
+  return `<div class="sheet-in"><h2 class="sheet-title" lang="es">Hoja de respuestas</h2><p class="sheet-sub">${sub}</p>
+    ${PARTS.map((P, p) => `<div class="sheet-part${mode === "test" && state.part === p ? " current" : ""}"><p class="sheet-label">${p + 1} · ${P.short}</p><div class="bubbles">${ITEMS.filter(i => i.part === p).map(i => bubble(i, mode)).join("")}</div></div>`).join("")}
+    ${legend}</div>`;
+}
+function cefrStrip(est){
+  const all = ["A1","A2","B1","B2","C1","C2"], ei = est ? all.indexOf(est) : -1;
+  return `<div class="cefr${est ? " res" : ""}"><div class="cefr-row" role="img" aria-label="${est ? "Livello stimato " + est + " sulla scala QCER" : "Livelli valutati: da A2 a C1"}">${all.map((l, i) => {
+    let c = "cefr-c";
+    if (!est && (l === "A1" || l === "C2")) c += " out";
+    if (est){ if (i <= ei) c += " reached"; if (i === ei) c += " here"; }
+    return `<span class="${c}">${l}</span>`; }).join("")}</div>
+    <p class="cefr-cap">${est ? "Scala QCER. Il test misura i livelli da A2 a C1." : "Livelli valutati dal test: da A2 a C1 (scala QCER)."}</p></div>`;
+}
+function meter(c, n, thr){
+  const p = pct(c, n);
+  return `<div class="meter" role="img" aria-label="${p}%"><span class="meter-fill" style="width:${p}%"></span>${thr ? `<span class="meter-thr" style="left:${thr}%"></span>` : ""}</div>`;
+}
+function barSimple(right){
+  return `<header class="bar"><div class="bar-in"><div class="brand"><span class="brand-mark" aria-hidden="true">ñ</span><span class="brand-t">Test di livello<small>Español · A2–C1</small></span></div><span class="bar-spacer"></span>${right || ""}</div></header>`;
+}
+function barTest(){
+  const r = remaining();
+  return `<header class="bar"><div class="bar-in test">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">ñ</span><span class="brand-t">Test di livello<small>Español · A2–C1</small></span></div>
+    <nav class="tabs" aria-label="Prove">${PARTS.map((P, p) => `<button type="button" class="tab${state.part === p ? " active" : ""}" data-part="${p}"${state.part === p ? ' aria-current="step"' : ""}><span class="tab-n">${p + 1}</span><span class="tab-t" lang="es">${P.short}</span><span class="tab-c" data-count="${p}">${answeredIn(p)}/${totalIn(p)}</span></button>`).join("")}</nav>
+    <div class="clock"><span class="clock-l">Tempo</span><span class="timer${r <= 60000 ? " crit" : r <= 300000 ? " warn" : ""}" id="timer" role="timer">${fmt(r)}</span></div>
+    <button type="button" class="btn btn-primary btn-submit" data-submit>Consegna</button>
+  </div></header>`;
+}
+function dialogHTML(){
+  return `<div class="overlay" id="confirm" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-t"><h2 id="dlg-t">Consegnare il test?</h2><p id="dlg-msg"></p><div class="dlg-actions"><button type="button" class="btn" data-close>Continua il test</button><button type="button" class="btn btn-primary" data-confirm-submit>Consegna ora</button></div></div></div>`;
+}
+
+/* ================= VIEWS ================= */
+function introHTML(){
+  const hist = loadHist();
+  return `${barSimple()}
+  <main class="wrap intro">
+    <section class="hero">
+      <p class="eyebrow" lang="es">Prueba de nivel · Español como lengua extranjera</p>
+      <h1 class="hero-t">Quanto è solido il tuo <em lang="es">español</em>?</h1>
+      <p class="lede">Trenta minuti e 49 domande in tre prove, come in un esame ufficiale: grammatica nel contesto, comprensione scritta e ascolto. Alla consegna ricevi il livello stimato, le statistiche per prova, per livello e per area, un piano di miglioramento e tutte le soluzioni commentate.</p>
+      ${cefrStrip(null)}
+    </section>
+    <section class="pgrid" aria-label="Struttura del test">
+      ${PARTS.map((P, p) => `<article class="pcard"><p class="pcard-n" lang="es">Prueba ${p + 1}</p><h2 class="pcard-t" lang="es">${P.name}</h2><p class="pcard-it">${P.it}</p><p class="pcard-s">${P.struct} · circa ${P.suggested} min</p></article>`).join("")}
+    </section>
+    <section class="two">
+      <div class="card rules"><h2 class="h2">Regole</h2><ul>
+        <li>Il cronometro parte quando premi «Inizia» e non si ferma. A 00:00 il test viene consegnato in automatico.</li>
+        <li>Puoi spostarti liberamente tra le tre prove e cambiare le risposte fino alla consegna.</li>
+        <li>Ogni audio si può ascoltare al massimo due volte. Usa le cuffie, se puoi.</li>
+        <li>Niente dizionario né traduttore: il risultato deve rispecchiare il tuo livello reale.</li>
+        <li>Le risposte vuote valgono zero e non ci sono penalità per gli errori: rispondi sempre.</li>
+      </ul></div>
+      <div class="card audio"><h2 class="h2">Prova l'audio</h2>
+        <p>L'ascolto usa la sintesi vocale del browser in spagnolo. Scegli la voce e controlla il volume adesso: durante il test gli ascolti sono contati.</p>
+        <div class="ac-row"><label for="voice-sel">Voce</label><select id="voice-sel"></select><button type="button" class="btn" data-test-voice>Prova audio</button></div>
+        <p class="ac-status" id="ac-status"></p>
+      </div>
+    </section>
+    <div class="start"><button type="button" class="btn btn-primary btn-lg" data-start>Inizia il test · 30:00</button><p class="start-note">Il tempo continua a scorrere anche se ricarichi la pagina.</p></div>
+    ${hist.length ? `<section class="sec"><h2 class="sec-h">Tentativi precedenti</h2>${histTable(hist)}</section>` : ""}
+  </main>`;
+}
+function testHTML(){
+  return `${barTest()}<main class="wrap"><div class="test-grid"><div class="col" id="part-view">${partHTML(state.part)}</div><aside class="sheet" id="sheet" aria-label="Foglio risposte">${sheetHTML("test")}</aside></div></main>${dialogHTML()}`;
+}
+
+function compute(){
+  const R = { c:0, w:0, e:0, n:ITEMS.length, part:PARTS.map(() => ({ c:0, n:0, e:0 })), lvl:{}, cat:{}, task:{} };
+  LEVELS.forEach(l => R.lvl[l] = { c:0, n:0 });
+  ITEMS.forEach(it => {
+    const u = state.answers[it.n], ok = u === it.a, em = u == null;
+    if (ok) R.c++; else if (em) R.e++; else R.w++;
+    const P = R.part[it.part]; P.n++; if (ok) P.c++; if (em) P.e++;
+    const L = R.lvl[it.level]; L.n++; if (ok) L.c++;
+    const C = R.cat[it.cat] || (R.cat[it.cat] = { name:it.cat, c:0, n:0, miss:[], parts:{} });
+    C.n++; if (ok) C.c++; else C.miss.push(it.n); C.parts[it.part] = true;
+    const T = R.task[it.task] || (R.task[it.task] = { c:0, n:0 }); T.n++; if (ok) T.c++;
+  });
+  const acc = l => R.lvl[l].c / R.lvl[l].n;
+  R.est = "A1"; R.ei = -1;
+  for (let k = LEVELS.length - 1; k >= 0; k--){
+    if (acc(LEVELS[k]) >= 0.6 && LEVELS.slice(0, k).every(l => acc(l) >= 0.5)){ R.est = LEVELS[k]; R.ei = k; break; }
+  }
+  R.next = LEVELS[R.ei + 1] || null;
+  R.towards = !!R.next && acc(R.next) >= 0.4;
+  R.pct = pct(R.c, R.n);
+  R.time = Math.min(DURATION, (state.finishedAt || Date.now()) - state.startedAt);
+  R.plays = TRACKS.reduce((s, t) => s + (state.plays[t.id] || 0), 0);
+  R.tx = TRACKS.filter(t => state.transcript[t.id]);
+  return R;
+}
+function histTable(h){
+  const rows = h.slice().reverse().slice(0, 8).map(x => {
+    const d = new Date(x.ts);
+    const ds = d.toLocaleDateString("it-IT", { day:"2-digit", month:"short", year:"numeric" }) + " · " + d.toLocaleTimeString("it-IT", { hour:"2-digit", minute:"2-digit" });
+    return `<tr><td>${ds}</td><td><b>${x.est}</b></td><td class="num">${x.c}/${x.n} · ${x.pct}%</td>${x.parts.map(p => `<td class="num">${p}%</td>`).join("")}<td class="num">${fmt(x.time)}</td></tr>`;
+  }).join("");
+  return `<div class="tablewrap"><table class="hist"><thead><tr><th>Data</th><th>Livello</th><th class="num">Punteggio</th><th class="num" lang="es">Gramática</th><th class="num" lang="es">Lectura</th><th class="num" lang="es">Audición</th><th class="num">Tempo</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function pushHistory(R){
+  const h = loadHist();
+  if (h.some(x => x.id === state.startedAt)) return;
+  h.push({ id:state.startedAt, ts:state.finishedAt, c:R.c, n:R.n, pct:R.pct, est:R.est, parts:R.part.map(p => pct(p.c, p.n)), time:R.time });
+  saveHist(h);
+}
+
+function improveHTML(R){
+  const out = [];
+  // next level
+  if (R.next){
+    const N = R.lvl[R.next], target = Math.ceil(0.6 * N.n), need = Math.max(0, target - N.c);
+    const blockers = LEVELS.slice(0, LEVELS.indexOf(R.next)).filter(l => R.lvl[l].c / R.lvl[l].n < 0.5);
+    let txt;
+    if (need > 0){
+      txt = `Per una stima <b>${R.next}</b> servono almeno ${target} risposte corrette su ${N.n} tra le domande di livello ${R.next}. Ne hai date ${N.c}.`;
+    } else {
+      txt = `Hai già superato la soglia delle domande ${R.next}, ma sei sotto il 50% al livello ${blockers.join(", ")}: prima di salire devi consolidare le basi.`;
+    }
+    out.push(`<div class="box"><h3>Verso il ${R.next}</h3><div class="gapnum">${need > 0 ? "+" + need : "✓"}</div><p>${need > 0 ? `risposte corrette in più nelle domande ${R.next}` : "soglia del livello successivo raggiunta"}</p><p>${txt}</p></div>`);
+  } else {
+    out.push(`<div class="box"><h3>Soglia massima del test</h3><div class="gapnum">C1</div><p>Hai superato tutte le soglie misurate da questa prova. Per verificare un C2 servono testi più lunghi, produzione scritta e orale.</p></div>`);
+  }
+  // consolidation + skills
+  const weak = LEVELS.slice(0, R.ei + 1).filter(l => R.lvl[l].c / R.lvl[l].n < 0.8);
+  const pp = R.part.map((p, i) => ({ i, v:p.c / p.n }));
+  const lo = pp.slice().sort((a, b) => a.v - b.v)[0], hi = pp.slice().sort((a, b) => b.v - a.v)[0];
+  let skill = `<p>Punto forte: <b lang="es">${PARTS[hi.i].name}</b> (${Math.round(hi.v * 100)}%). Da potenziare: <b lang="es">${PARTS[lo.i].name}</b> (${Math.round(lo.v * 100)}%).</p><p>${PART_TIPS[lo.i]}</p>`;
+  if (hi.i === lo.i || Math.abs(hi.v - lo.v) < 0.08) skill = `<p>Le tre abilità sono equilibrate (scarto inferiore a 8 punti). ${PART_TIPS[lo.i]}</p>`;
+  if (weak.length) skill += `<p>Consolida anche ${weak.map(l => `il ${l} (${pct(R.lvl[l].c, R.lvl[l].n)}%)`).join(" e ")}: un livello si considera solido sopra l'80%.</p>`;
+  out.push(`<div class="box"><h3>Abilità</h3>${skill}</div>`);
+  // priorities
+  const cats = Object.values(R.cat).filter(c => c.miss.length).sort((a, b) => (b.miss.length - a.miss.length) || (a.c / a.n - b.c / b.n)).slice(0, 3);
+  if (cats.length){
+    out.push(`<div class="box wide"><h3>Priorità di studio</h3><ol class="pri">${cats.map(c => {
+      const after = pct(R.c + c.miss.length, R.n);
+      return `<li><div><div class="pri-head"><strong>${esc(c.name)}</strong><span>${c.c}/${c.n} corrette · ${pct(c.c, c.n)}%</span></div><p>${esc(CAT_TIPS[c.name] || "")}</p><p class="pri-gain">Recuperando quest'area il punteggio salirebbe dal ${R.pct}% al ${after}%. Rivedi: ${c.miss.map(n => `<button type="button" class="jump" data-jump="${n}">${n}</button>`).join("")}</p></div></li>`;
+    }).join("")}</ol></div>`);
+  } else {
+    out.push(`<div class="box wide"><h3>Priorità di studio</h3><p>Nessun errore: complimenti. Per continuare a crescere passa a materiale autentico di livello C1–C2 (saggistica, radio, dibattiti).</p></div>`);
+  }
+  // time
+  let tt = `Hai usato ${fmt(R.time)} su 30:00. `;
+  if (state.expired) tt += R.e ? `Il tempo è scaduto con ${R.e} domande senza risposta: allenati a fare un primo giro veloce rispondendo a tutto, poi torna sui dubbi.` : "Il tempo è scaduto, ma hai risposto a tutto: buona gestione, al limite.";
+  else if (R.e) tt += `Hai consegnato lasciando ${R.e} risposte vuote: senza penalità per gli errori conviene sempre rispondere.`;
+  else if (R.time < 15 * 60000 && R.pct < 75) tt += "Hai consegnato con molto anticipo: usa il tempo che resta per rileggere i testi e ricontrollare le risposte dubbie.";
+  else tt += "Hai risposto a tutte le domande nei tempi.";
+  const over = PARTS.map((P, i) => ({ P, ms:state.partTime[i] })).filter(x => x.ms > (x.P.suggested + 3) * 60000);
+  if (over.length) tt += ` Hai superato di oltre 3 minuti il tempo consigliato in: ${over.map(x => x.P.short).join(", ")}.`;
+  tt += ` Ascolti usati: ${R.plays} su ${TRACKS.length * 2}.`;
+  out.push(`<div class="box wide"><h3>Gestione del tempo</h3><p>${tt}</p></div>`);
+  return `<div class="improve">${out.join("")}</div>`;
+}
+
+function reviewHTML(R){
+  return PARTS.map((P, p) => {
+    const tasks = TASKS.filter(t => t.part === p);
+    return `<div class="rv-part"><h3 class="rv-part-h" lang="es">Prueba ${p + 1} · ${P.name}</h3>${tasks.map((t, idx) => {
+      const T = R.task[t.id], allok = T.c === T.n;
+      let doc = "";
+      if (t.track){
+        doc = `<p class="task-ctx" lang="es">${esc(t.context)}</p><details class="txd"><summary>Trascrizione dell'audio</summary>${transcriptHTML(t)}</details>`;
+      } else if (t.part === 0){
+        doc = docHTML(t, paras(t.text, n => {
+          const it = BYN[n], u = state.answers[n];
+          if (u === it.a) return `<mark class="fill ok"><sup>${n}</sup>${esc(it.opts[it.a])}</mark>`;
+          if (u == null) return `<mark class="fill miss"><sup>${n}</sup>${esc(it.opts[it.a])}</mark>`;
+          return `<s class="fill bad"><sup>${n}</sup>${esc(it.opts[u])}</s><mark class="fill ok">${esc(it.opts[it.a])}</mark>`;
+        }));
+      } else {
+        doc = `<details class="txd"><summary>Testo</summary>${docHTML(t, paras(t.text, () => ""))}</details>`;
+      }
+      return `<article class="task rv-task${allok ? " allok" : ""}"><header class="task-head"><span class="task-n">Tarea ${idx + 1}</span><span class="task-kind" lang="es">${esc(t.label)}</span><span class="task-score">${T.c}/${T.n}</span></header>${doc}<div>${t.items.map(rvItem).join("")}</div></article>`;
+    }).join("")}</div>`;
+  }).join("");
+}
+function rvItem(it){
+  const u = state.answers[it.n], st = u === it.a ? "ok" : u == null ? "empty" : "bad";
+  const verdict = { ok:"✓ Corretta", bad:"✕ Errata", empty:"○ Senza risposta" }[st];
+  const yours = st === "bad" ? `<span class="a-bad">La tua: <b lang="es">${LET[u]}) ${esc(it.opts[u])}</b></span>` : "";
+  const right = `<span class="a-ok">${st === "ok" ? "La tua risposta" : "Corretta"}: <b lang="es">${LET[it.a]}) ${esc(it.opts[it.a])}</b></span>`;
+  return `<div class="rv-item is-${st}" id="rv-${it.n}"><div class="rv-head"><span class="q-n">${it.n}</span><span class="v-${st}">${verdict}</span><span class="chip lvl">${it.level}</span><span class="chip">${esc(it.cat)}</span></div>${it.q ? `<p class="rv-q" lang="es">${esc(it.q)}</p>` : ""}<p class="rv-ans">${yours}${right}</p><p class="rv-why">${esc(it.why)}</p></div>`;
+}
+
+function resultsHTML(){
+  const R = compute(), hist = loadHist();
+  const qual = R.next ? (R.towards ? `in avvicinamento al ${R.next}` : `${R.est === "A1" ? "sotto la soglia A2 del test" : "soglia " + R.est + " superata"}`) : "soglia massima del test";
+  const levelRows = LEVELS.map(l => {
+    const x = R.lvl[l], pass = x.c / x.n >= 0.6;
+    return `<div class="mrow"><span class="mrow-l">${l}<small>${x.n} domande</small></span>${meter(x.c, x.n, 60)}<span class="mrow-v">${x.c}/${x.n} · ${pct(x.c, x.n)}%</span><span class="chip ${pass ? "pass" : "fail"}">${pass ? "✓ soglia superata" : "✕ sotto soglia"}</span></div>`;
+  }).join("");
+  const cats = Object.values(R.cat).sort((a, b) => (a.c / a.n - b.c / b.n) || (b.n - a.n));
+  const catRows = cats.map(c => `<div class="mrow"><span class="mrow-l">${esc(c.name)}<small>${Object.keys(c.parts).map(p => PARTS[p].short).join(" · ")}</small></span>${meter(c.c, c.n, 70)}<span class="mrow-v">${c.c}/${c.n} · ${pct(c.c, c.n)}%</span></div>`).join("");
+  const timeRows = PARTS.map((P, i) => {
+    const ms = state.partTime[i] || 0, w = Math.min(100, ms / DURATION * 100), s = P.suggested / 30 * 100;
+    return `<div class="mrow"><span class="mrow-l" lang="es">${P.short}</span><div class="meter" role="img" aria-label="${fmt(ms)} su ${P.suggested} minuti consigliati"><span class="meter-fill" style="width:${w}%"></span><span class="meter-thr" style="left:${s}%"></span></div><span class="mrow-v">${fmt(ms)} <small>/ ${P.suggested}:00</small></span></div>`;
+  }).join("");
+  const partCards = PARTS.map((P, p) => {
+    const x = R.part[p];
+    return `<article class="rcard"><p class="pcard-n" lang="es">Prueba ${p + 1}</p><h3 class="rcard-t" lang="es">${P.name}</h3><p class="rcard-v"><span class="big">${pct(x.c, x.n)}%</span><span>${x.c}/${x.n} corrette${x.e ? ` · ${x.e} vuote` : ""}</span></p>${meter(x.c, x.n)}${p === 2 && R.tx.length ? `<p class="note">Svolto con trascrizione: ${R.tx.map(t => esc(t.label)).join(", ")}. Il dato di ascolto è sovrastimato.</p>` : ""}</article>`;
+  }).join("");
+  const filt = state.filter === "wrong" ? "wrong" : "all";
+  return `${barSimple(`<button type="button" class="btn" data-reset>Rifai il test</button>`)}
+  <main class="wrap res">
+    <section class="res-hero" aria-label="Riepilogo">
+      <div class="level-card">
+        <p class="eyebrow">Livello stimato (QCER)</p>
+        <div class="level-row"><span class="level-big">${R.est}</span><p class="level-q">${qual}</p></div>
+        ${cefrStrip(R.est)}
+        <p class="level-d">${LDESC[R.est]}</p>
+        <p class="caveat">Stima indicativa su 49 domande in 30 minuti: un livello è raggiunto con almeno il 60% delle sue domande e almeno il 50% su quelli inferiori. Non sostituisce una certificazione DELE o SIELE.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-v">${R.c}<small> / ${R.n}</small></span><span class="stat-l">risposte corrette · ${R.pct}%</span></div>
+        <div class="stat"><span class="stat-v">${fmt(R.time)}</span><span class="stat-l">tempo usato su 30:00${state.expired ? " · scaduto" : ""}</span></div>
+        <div class="stat"><span class="stat-v">${R.w}</span><span class="stat-l">risposte errate</span></div>
+        <div class="stat"><span class="stat-v">${R.e}</span><span class="stat-l">risposte vuote</span></div>
+      </div>
+    </section>
+
+    <section class="sec"><h2 class="sec-h">Risultato per prova</h2><div class="rgrid">${partCards}</div></section>
+
+    <section class="sec"><h2 class="sec-h">Profilo per livello</h2><p class="sec-sub">Percentuale di risposte corrette tra le domande di ciascun livello. La tacca segna la soglia del 60%.</p><div class="card mlist">${levelRows}</div></section>
+
+    <section class="sec"><h2 class="sec-h">Margine di miglioramento</h2><p class="sec-sub">Quanto manca al livello successivo, dove intervenire per primo e quanti punti vale ogni area.</p>${improveHTML(R)}</section>
+
+    <section class="sec"><h2 class="sec-h">Analisi per area</h2><p class="sec-sub">Dalla più debole alla più forte. La tacca segna il 70%, il minimo per considerare un'area sotto controllo.</p><div class="card mlist no-chip">${catRows}</div></section>
+
+    <section class="sec"><h2 class="sec-h">Tempo per prova</h2><p class="sec-sub">Barra su scala 0–30 minuti; la tacca indica il tempo consigliato per ogni prova.</p><div class="card mlist no-chip">${timeRows}</div></section>
+
+    <section class="sec"><h2 class="sec-h">Foglio risposte</h2><div class="card" style="padding:0;border:0;background:none">${sheetHTML("res")}</div></section>
+
+    <section class="sec" id="review-sec"><h2 class="sec-h">Correzione dettagliata</h2><p class="sec-sub">Ogni domanda con la risposta corretta e la spiegazione. Nella prova 1 il testo è ricostruito con le soluzioni.</p>
+      <div class="seg" role="group" aria-label="Filtro correzione"><button type="button" data-filter="all" aria-pressed="${filt === "all"}">Tutte le domande</button><button type="button" data-filter="wrong" aria-pressed="${filt === "wrong"}">Solo errori e vuote (${R.w + R.e})</button></div>
+      <div class="review rv-part" id="review" data-show="${filt}">${reviewHTML(R)}</div>
+    </section>
+
+    ${hist.length ? `<section class="sec"><h2 class="sec-h">Storico tentativi</h2><p class="sec-sub">Salvato solo in questo browser.</p>${histTable(hist)}</section>` : ""}
+    <div class="res-actions"><button type="button" class="btn btn-primary" data-reset>Rifai il test</button></div>
+  </main>`;
+}
+
+/* ================= CONTROL ================= */
+let tick = null, tickCount = 0;
+function render(){
+  if (state.phase === "intro") root.innerHTML = introHTML();
+  else if (state.phase === "test") root.innerHTML = testHTML();
+  else root.innerHTML = resultsHTML();
+  if (state.phase === "intro") updateVoiceUI();
+  if (state.phase === "test"){ refreshPlayers(); startTick(); }
+}
+function accumulate(){
+  if (state.partEnteredAt){
+    const now = Math.min(Date.now(), state.startedAt + DURATION);
+    state.partTime[state.part] += Math.max(0, now - state.partEnteredAt);
+    state.partEnteredAt = now;
+  }
+}
+function startTick(){
+  if (tick) return;
+  tick = setInterval(() => {
+    if (state.phase !== "test"){ clearInterval(tick); tick = null; return; }
+    const r = remaining(), el = $("#timer");
+    if (el){ el.textContent = fmt(r); el.classList.toggle("warn", r <= 300000 && r > 60000); el.classList.toggle("crit", r <= 60000); }
+    if (++tickCount % 10 === 0){ accumulate(); save(); }
+    if (r <= 0) finish(true);
+  }, 1000);
+}
+function start(){
+  stopSpeech();
+  state = fresh();
+  state.phase = "test"; state.startedAt = Date.now(); state.partEnteredAt = Date.now();
+  save(); render(); window.scrollTo(0, 0);
+}
+function finish(expired){
+  if (state.phase !== "test") return;
+  stopSpeech();
+  accumulate();
+  state.phase = "results";
+  state.finishedAt = Math.min(Date.now(), state.startedAt + DURATION);
+  state.expired = !!expired;
+  state.partEnteredAt = null;
+  pushHistory(compute());
+  save(); render(); window.scrollTo(0, 0);
+}
+function switchPart(p, toTop){
+  if (p === state.part) return;
+  stopSpeech();
+  accumulate();
+  state.part = p; state.partEnteredAt = Date.now();
+  save();
+  $("#part-view").innerHTML = partHTML(p);
+  $("#sheet").innerHTML = sheetHTML("test");
+  $$(".tab").forEach(b => { const on = +b.dataset.part === p; b.classList.toggle("active", on); if (on) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+  refreshPlayers();
+  if (toTop !== false) window.scrollTo(0, 0);
+}
+function goTo(n){
+  const it = BYN[n]; if (!it) return;
+  if (state.part !== it.part) switchPart(it.part, false);
+  requestAnimationFrame(() => {
+    const el = document.getElementById("q-" + n); if (!el) return;
+    el.scrollIntoView({ block:"center", behavior: reduceMotion() ? "auto" : "smooth" });
+    const inp = el.querySelector("input:checked") || el.querySelector("input");
+    if (inp) inp.focus({ preventScroll:true });
+  });
+}
+function onAnswer(n){
+  const it = BYN[n], u = state.answers[n];
+  $$(`.gap[data-gap="${n}"]`).forEach(g => { g.classList.add("filled"); g.innerHTML = `<sup>${n}</sup><span class="gap-t">${esc(it.opts[u])}</span>`; g.setAttribute("aria-label", `Spazio ${n}: ${it.opts[u]}`); });
+  const q = document.getElementById("q-" + n); if (q) q.classList.add("answered");
+  const b = $(`.bub[data-goto="${n}"]`); if (b){ b.classList.add("on"); b.setAttribute("aria-label", `Domanda ${n}, risposta ${LET[u]}`); }
+  const c = $(`[data-count="${it.part}"]`); if (c) c.textContent = `${answeredIn(it.part)}/${totalIn(it.part)}`;
+  const s = $("#sheet-sub"); if (s) s.textContent = `${answeredAll()} di ${ITEMS.length} risposte date`;
+}
+function askSubmit(){
+  const left = ITEMS.length - answeredAll();
+  const msg = left
+    ? `Hai ancora ${left} ${left === 1 ? "domanda" : "domande"} senza risposta e ${fmt(remaining())} di tempo. Le risposte vuote valgono zero.`
+    : `Hai risposto a tutte le 49 domande. Restano ${fmt(remaining())}: dopo la consegna non potrai più modificare le risposte.`;
+  $("#dlg-msg").textContent = msg;
+  $("#confirm").hidden = false;
+  $("[data-confirm-submit]").focus();
+}
+function closeDialog(){ const d = $("#confirm"); if (d) d.hidden = true; }
+
+function updateVoiceUI(){
+  const sel = $("#voice-sel"), st = $("#ac-status");
+  if (sel){
+    const pref = primaryVoice();
+    if (esVoices.length){
+      sel.innerHTML = esVoices.map(v => `<option value="${esc(v.voiceURI)}"${pref && v.voiceURI === pref.voiceURI ? " selected" : ""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("");
+      sel.disabled = false;
+    } else {
+      sel.innerHTML = `<option>${!synth ? "Non disponibile" : voicesReady ? "Nessuna voce spagnola" : "Caricamento…"}</option>`;
+      sel.disabled = true;
+    }
+  }
+  if (st){
+    const w = noVoiceMsg();
+    st.className = "ac-status " + (w ? "warn" : "ok");
+    st.textContent = w || `${esVoices.length} ${esVoices.length === 1 ? "voce spagnola disponibile" : "voci spagnole disponibili"}. Nei dialoghi viene scelta, se c'è, una seconda voce per l'altro personaggio.`;
+  }
+  const bn = $("#voice-banner");
+  if (bn){ const w = noVoiceMsg(); if (w) bn.textContent = w; else bn.remove(); }
+}
+function testVoice(){
+  if (!synth) return;
+  try { synth.cancel(); } catch(e){}
+  const u = new SpeechSynthesisUtterance("Hola. Esta es una prueba de audio. Si me oyes con claridad, ya puedes empezar.");
+  const v = primaryVoice(); if (v){ u.voice = v; u.lang = v.lang; } else u.lang = "es-ES";
+  u.rate = 0.95; keepAlive.push(u);
+  synth.speak(u);
+}
+
+/* ================= EVENTS ================= */
+root.addEventListener("change", e => {
+  const t = e.target;
+  if (t.matches('input[type="radio"][name^="q"]') && state.phase === "test"){
+    const n = +t.name.slice(1);
+    state.answers[n] = +t.value; save(); onAnswer(n);
+  } else if (t.id === "voice-sel"){
+    setVoicePref(t.value); updateVoiceUI();
+  }
+});
+root.addEventListener("click", e => {
+  const el = e.target.closest("[data-part],[data-goto],[data-gap],[data-submit],[data-close],[data-confirm-submit],[data-play],[data-tx],[data-tx-yes],[data-tx-no],[data-start],[data-reset],[data-filter],[data-jump],[data-test-voice]");
+  if (!el) { if (e.target.id === "confirm") closeDialog(); return; }
+  const d = el.dataset;
+  if (d.start !== undefined) return start();
+  if (d.testVoice !== undefined) return testVoice();
+  if (d.part !== undefined) return switchPart(+d.part);
+  if (d.goto !== undefined) return goTo(+d.goto);
+  if (d.gap !== undefined) return goTo(+d.gap);
+  if (d.submit !== undefined) return askSubmit();
+  if (d.close !== undefined) return closeDialog();
+  if (d.confirmSubmit !== undefined){ closeDialog(); return finish(false); }
+  if (d.play !== undefined) return play(d.play);
+  if (d.tx !== undefined){
+    const box = $("#txr-" + d.tx);
+    if (box) box.outerHTML = `<div class="tx-box" id="txr-${d.tx}"><span>Se mostri la trascrizione, questa diventa una prova di lettura: nei risultati l'audio sarà segnalato come svolto con il testo.</span><div class="row"><button type="button" class="btn" data-tx-yes="${d.tx}">Mostra trascrizione</button><button type="button" class="btn" data-tx-no="${d.tx}">Annulla</button></div></div>`;
+    return;
+  }
+  if (d.txYes !== undefined){ state.transcript[d.txYes] = true; save(); $("#txw-" + d.txYes).innerHTML = txBlock(TBY[d.txYes]); return; }
+  if (d.txNo !== undefined){ $("#txw-" + d.txNo).innerHTML = txBlock(TBY[d.txNo]); return; }
+  if (d.filter !== undefined){
+    state.filter = d.filter; save();
+    $("#review").dataset.show = d.filter;
+    $$("[data-filter]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filter === d.filter)));
+    return;
+  }
+  if (d.jump !== undefined){
+    const n = +d.jump, item = document.getElementById("rv-" + n);
+    if (!item) return;
+    if (item.classList.contains("is-ok") && state.filter === "wrong"){ state.filter = "all"; $("#review").dataset.show = "all"; $$("[data-filter]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.filter === "all"))); }
+    item.scrollIntoView({ block:"center", behavior: reduceMotion() ? "auto" : "smooth" });
+    item.classList.remove("flash"); void item.offsetWidth; item.classList.add("flash");
+    return;
+  }
+  if (d.reset !== undefined){
+    if (!el.dataset.armed){
+      el.dataset.armed = "1"; const old = el.textContent; el.textContent = "Conferma: ricomincia da capo";
+      setTimeout(() => { if (el.isConnected){ delete el.dataset.armed; el.textContent = old; } }, 4000);
+      return;
+    }
+    stopSpeech(); state = fresh(); save(); render(); window.scrollTo(0, 0);
+  }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeDialog(); });
+document.addEventListener("visibilitychange", () => { if (state.phase === "test"){ accumulate(); save(); } });
+window.addEventListener("pagehide", () => { if (state.phase === "test"){ accumulate(); save(); } });
+
+/* ================= BOOT ================= */
+if (synth){
+  refreshVoices();
+  if ("onvoiceschanged" in synth) synth.onvoiceschanged = refreshVoices;
+  setTimeout(() => { voicesReady = true; refreshVoices(); }, 2000);
+}
+state = load() || fresh();
+if (state.phase === "test"){
+  if (remaining() <= 0){ state.partEnteredAt = null; state.phase = "test"; render(); finish(true); }
+  else { state.partEnteredAt = Date.now(); save(); render(); }
+} else render();
+})();
+</script>
+</body>
+</html>
